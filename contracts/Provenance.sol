@@ -15,6 +15,7 @@ contract Provenance is Ownable {
     struct Producer {
         string name;
         string producer_type;
+        address autherized_by;
         bool certification;
         ActionStatus action_status;
     }
@@ -40,7 +41,7 @@ contract Provenance is Ownable {
 
     function addProducer(address from, string memory name, string memory producer_type ) public {
       require(producers[from].action_status != ActionStatus.ADDED, "This producer is already exist.");
-      producers[from] = Producer(name, producer_type, false, ActionStatus.ADDED);
+      producers[from] = Producer(name, producer_type, msg.sender, false, ActionStatus.ADDED);
       producer_list.push(from);
       producer_count ++;
     }
