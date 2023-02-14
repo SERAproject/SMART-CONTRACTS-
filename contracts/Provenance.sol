@@ -14,27 +14,35 @@ contract Provenance is Ownable {
 
     struct Producer {
         string name;
-        string phone_number;
-        string city;
-        string state;
-        string country_of_origin;
+        string producer_type;
         bool certification;
         ActionStatus action_status;
     }
 
     struct Product {
         address producer_address;
-        string location;
+        string name;
         uint date_time_of_origin;
         ActionStatus action_status;
     }
 
     mapping(address => Producer) public producers;
-    mapping(uint256 => Product) public products;
+    mapping(string => Product) public products;
+    address[] public producer_list;
+    string[] public product_list;
+    uint256 public producer_count;
+    uint256 public product_count;
     
-    function addProducer(address from, string memory name, string memory phone_number, string memory city, string memory state, string memory country_of_origin ) public {
-        require(producers[from].action_status != ActionStatus.ADDED, "This producer is already exist.");
-        producers[from] = Producer(name, phone_number, city, state, country_of_origin, false, ActionStatus.ADDED);
+    constructor() {
+        producer_count = 0;
+        product_count = 0;
+    }
+
+    function addProducer(address from, string memory name, string memory producer_type ) public {
+      require(producers[from].action_status != ActionStatus.ADDED, "This producer is already exist.");
+      producers[from] = Producer(name, producer_type, false, ActionStatus.ADDED);
+      producer_list.push(from);
+      producer_count ++;
     }
 
     function findProducer(address recipient) public view returns (Producer memory) {
@@ -49,17 +57,19 @@ contract Provenance is Ownable {
         producers[recipient].certification = true;
     }
 
-    function addProduct(uint256 serial_number, string memory location) public {
-        require(products[serial_number].action_status != ActionStatus.ADDED, "This product is already exist.");
-        products[serial_number] = Product(msg.sender, location, block.timestamp, ActionStatus.ADDED);
+    function addProduct(string memory pub_number, string memory name) public {
+        require(products[pub_number].action_status != ActionStatus.ADDED, "This product is already exist.");
+        products[pub_number] = Product(msg.sender, name, block.timestamp, ActionStatus.ADDED);
+        product_list.push(pub_number);
+        product_count ++;
     }
 
-    function removeProduct(uint256 serial_number) public onlyOwner {
-        products[serial_number].action_status = ActionStatus.REMOVED;
+    function removeProduct(string memory pub_number) public onlyOwner {
+        products[pub_number].action_status = ActionStatus.REMOVED;
     }
     
-    function findProduct(uint256 serial_number) public view returns (Product memory) {
-        return products[serial_number];
+    function findProduct(string memory pub_number) public view returns (Product memory) {
+        return products[pub_number];
     }
 
 }

@@ -5,10 +5,10 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const SeraNFTFactory = await ethers.getContractFactory("SeraNFTFactory");
-  const factory = await SeraNFTFactory.deploy();
+  const SeraNFT = await ethers.getContractFactory("SeraNFT");
+  const seraNFT = await SeraNFT.deploy();
 
-  console.log("SeraNFTFactory address:", factory.address);
+  console.log("SeraNFT address:", seraNFT.address);
 }
 
 main()
