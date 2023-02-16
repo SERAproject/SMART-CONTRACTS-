@@ -13,9 +13,13 @@ contract Provenance is Ownable {
     }
 
     struct Producer {
-        string name;
-        string producer_type;
-        address autherized_by;
+        string email;
+        string trade_name;
+        string legal_name;
+        string country;
+        string state_town;
+        string building_number;
+        string phone_number;
         bool certification;
         ActionStatus action_status;
     }
@@ -29,7 +33,9 @@ contract Provenance is Ownable {
 
     mapping(address => Producer) public producers;
     mapping(string => Product) public products;
-    address[] public producer_list;
+    mapping(address => mapping(address => bool)) public auth_producer;
+		mapping(uint256 => address) public producer_list;
+		mapping(address => bool) public is_producer;
     string[] public product_list;
     uint256 public producer_count;
     uint256 public product_count;
@@ -39,12 +45,20 @@ contract Provenance is Ownable {
         product_count = 0;
     }
 
-    function addProducer(address from, string memory name, string memory producer_type ) public {
-      require(producers[from].action_status != ActionStatus.ADDED, "This producer is already exist.");
-      producers[from] = Producer(name, producer_type, msg.sender, false, ActionStatus.ADDED);
-      producer_list.push(from);
+    function addProducer(address to, string memory email, string memory trade_name, string memory legal_name, string memory country, string memory state_town, string memory building_number, string memory phone_number) public {
+      require(producers[to].action_status != ActionStatus.ADDED, "This producer is already exist.");
+      producers[to] = Producer(email, trade_name, legal_name, country, state_town, building_number, phone_number, false, ActionStatus.ADDED);
       producer_count ++;
+			producer_list[producer_count] = to;
+			is_producer[to] = true;
     }
+
+		function authProducer(address to) public {
+			if(msg.sender > to)
+        auth_producer[msg.sender][to] = true;
+    	else
+        auth_producer[to][msg.sender] = true;
+		}
 
     function findProducer(address recipient) public view returns (Producer memory) {
         return producers[recipient];
