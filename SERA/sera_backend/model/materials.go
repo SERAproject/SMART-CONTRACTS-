@@ -34,11 +34,20 @@ func FindMaterialById(id uint) (Material, error) {
     return material, nil
 }
 
-func FindMaterialByStatus(status uint) (Material, error) {
-    var material Material
+func FindMaterialByStatus(status uint) ([]Material, error) {
+    var material []Material
     err := database.Database.Where("status=?", status).Find(&material).Error
+    if err != nil {
+        return material, err
+    }
+    return material, nil
+}
+
+func (material *Material) UpdateMaterial(m Material) (Material, error) {
+    err := database.Database.Where("material_id=?", m.MaterialId).Updates(m).Error
     if err != nil {
         return Material{}, err
     }
-    return material, nil
+
+    return m, nil
 }

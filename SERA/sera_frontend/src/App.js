@@ -72,6 +72,7 @@ const App = () => {
   const [visible, setVisible] = useState(false);
   const [balance, setBalance] = useState(0);
   const [notiCount, setNotiCount] = useState(0);
+  const [notiData, setNotiData] = useState([]);
   const [form] = Form.useForm();
   const [state, setState] = useState({
     email: "",
@@ -174,6 +175,20 @@ const App = () => {
     if (e.key === "3") disConnect(injected);
   };
 
+  const onNotiClick = async (e) => {
+    console.log(e.key);
+    const res = await axios.post(
+      `${process.env.REACT_APP_IP_ADDRESS}/v1/updaterfqbystatus`,
+      {
+        MaterialId: e.key,
+        Status: 1,
+      }
+    );
+
+    if (res.data.status_code === 200) {
+      updateNotiData();
+    }
+  };
   const renderButton = (
     <>
       {active ? (
@@ -203,6 +218,28 @@ const App = () => {
     </>
   );
 
+  const updateNotiData = async () => {
+    const res = await axios.post(
+      `${process.env.REACT_APP_IP_ADDRESS}/v1/getrfqbystatus`,
+      {
+        Status: 0,
+      }
+    );
+
+    if (res.data.status_code === 200) {
+      await setNotiCount(res.data.data.length);
+      console.log(res.data.data);
+      let tmp = [];
+      res.data.data.map((item) => {
+        tmp.push({
+          label: item.Buspartner + " was added new RFQ.",
+          key: item.MaterialId,
+        });
+      });
+      await setNotiData(tmp);
+    }
+  };
+
   useEffect(() => {
     if (active) {
       if (chainId !== parseInt(process.env.REACT_APP_CHAIN_ID)) {
@@ -220,12 +257,14 @@ const App = () => {
       });
       async function FetchData() {
         try {
+          await updateNotiData();
           const res = await axios.post(
             `${process.env.REACT_APP_IP_ADDRESS}/v1/getuser`,
             {
               Wallet_address: account,
             }
           );
+
           if (res.data.status_code === 200) {
             let {
               Email,
@@ -298,9 +337,23 @@ const App = () => {
         />
         <Avatar shape="square" src={logo} style={logoStyle} />
         <span className="float-right">
-          <Badge className="badge" size="small" count={notiCount}>
-            <Button className="btn btn-bell" icon={<BellOutlined />} />
-          </Badge>
+          <Dropdown
+            menu={{
+              items: notiData,
+              onClick: onNotiClick,
+            }}
+            placement="bottomRight"
+            arrow
+            trigger={["click"]}
+          >
+            <Badge className="badge" size="small" count={notiCount}>
+              <Button
+                className="btn btn-bell"
+                icon={<BellOutlined />}
+                onClick={(e) => e.preventDefault()}
+              />
+            </Badge>
+          </Dropdown>
           {renderButton}
         </span>
 

@@ -138,7 +138,7 @@ func GetRFQByStatus(c *gin.Context) {
 
     material, err := model.FindMaterialByStatus(input.Status)
 
-    if len(material.MaterialItems) == 0 {
+    if len(material) == 0 {
         c.JSON(http.StatusNoContent, gin.H{
             "status_code": 204,
             "api_version": "v1",
@@ -157,5 +157,45 @@ func GetRFQByStatus(c *gin.Context) {
         "status": "Success!",
         "msg":    "Success.",
         "data": material,
+    })
+}
+
+
+func UpdateRFQByStatus(c *gin.Context) {
+    var input model.Material
+
+    if err := c.Bind(&input); err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{
+            "status_code": 500,
+            "api_version": "v1",
+            "endpoint": "/UpdateRFQByStatus",
+            "status": "Internal Server Error.",
+            "msg":    "Internal Server Error.",
+            "data":   nil,
+        })
+        c.Abort()
+        return
+    } 
+
+    user, err := input.UpdateMaterial(input)
+    
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{
+            "status_code": 500,
+            "api_version": "v1",
+            "endpoint": "/UpdateRFQByStatus",
+            "status": "Failure!",
+            "msg":    "Internal Server Error!",
+        })
+        return
+    }
+
+    c.JSON(http.StatusCreated, gin.H{
+        "status_code": 200,
+        "api_version": "v1",
+        "endpoint": "/UpdateRFQByStatus",
+        "status": "Updated Successfully!",
+        "msg":    "Updated Successfully!",
+        "data": user, 
     })
 }
