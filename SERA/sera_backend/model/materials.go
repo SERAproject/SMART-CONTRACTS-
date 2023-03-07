@@ -2,6 +2,7 @@ package model
 
 import (
 	"example/task/database"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -44,6 +45,7 @@ func FindMaterialByStatus(status uint) ([]Material, error) {
 }
 
 func (material *Material) UpdateMaterial(m Material) (Material, error) {
+    fmt.Println(m.MaterialId, m.Status);
     err := database.Database.Where("material_id=?", m.MaterialId).Updates(m).Error
     if err != nil {
         return Material{}, err

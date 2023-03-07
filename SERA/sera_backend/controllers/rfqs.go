@@ -177,7 +177,7 @@ func UpdateRFQByStatus(c *gin.Context) {
         return
     } 
 
-    user, err := input.UpdateMaterial(input)
+    material, err := input.UpdateMaterial(input)
     
     if err != nil {
         c.JSON(http.StatusInternalServerError, gin.H{
@@ -196,6 +196,6 @@ func UpdateRFQByStatus(c *gin.Context) {
         "endpoint": "/UpdateRFQByStatus",
         "status": "Updated Successfully!",
         "msg":    "Updated Successfully!",
-        "data": user, 
+        "data": material, 
     })
 }
