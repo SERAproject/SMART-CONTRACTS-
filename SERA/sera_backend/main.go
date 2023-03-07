@@ -53,6 +53,7 @@ func serveApplication() {
     publicRoutes.POST("/addpartner", controllers.AddPartner)
     publicRoutes.POST("/getpartner", controllers.GetPartner)
     publicRoutes.POST("/getrfq", controllers.GetRFQ)
+    publicRoutes.POST("/getrfqbystatus", controllers.GetRFQByStatus)
     publicRoutes.POST("/addrfq", controllers.AddRFQ)
     publicRoutes.POST("/sendmail", controllers.SendMail)
 

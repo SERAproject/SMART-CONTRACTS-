@@ -66,6 +66,24 @@
   /* right: 75px; */
 }
 
+.btn-bell {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #4bf0d3;
+  border-color: #4bf0d3;
+  border-radius: 5px;
+  width: 38px !important;
+  height: 40px;
+}
+
+.badge {
+  margin-right: 14px;
+  border: 0px;
+}
+
+.margin-right-8 {
+  margin-right: 8px;
+}
+
 @media (min-width: 992px) {
   .menu {
     display: none;

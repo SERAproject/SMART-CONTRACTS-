@@ -17,11 +17,14 @@ import {
   Dropdown,
   message,
   Tag,
+  Badge,
 } from "antd";
 import {
   MenuOutlined,
   CaretDownOutlined,
   EditOutlined,
+  BellOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
 import { useWeb3React } from "@web3-react/core";
 import { injected } from "./utils/connector";
@@ -68,6 +71,7 @@ const App = () => {
   const [isEdited, setEdited] = useState(true);
   const [visible, setVisible] = useState(false);
   const [balance, setBalance] = useState(0);
+  const [notiCount, setNotiCount] = useState(0);
   const [form] = Form.useForm();
   const [state, setState] = useState({
     email: "",
@@ -181,7 +185,7 @@ const App = () => {
           trigger={["click"]}
         >
           <Button
-            className="btn btn-green btn-launch-app"
+            className="btn btn-launch-app"
             onClick={(e) => e.preventDefault()}
           >
             {account.substring(0, 5) + " ... " + account.substring(38)}{" "}
@@ -190,7 +194,7 @@ const App = () => {
         </Dropdown>
       ) : (
         <Button
-          className="btn btn-green btn-launch-app"
+          className="btn btn-launch-app"
           onClick={() => connect(injected)}
         >
           CONNECT WALLET
@@ -293,7 +297,13 @@ const App = () => {
           onClick={() => setVisible(true)}
         />
         <Avatar shape="square" src={logo} style={logoStyle} />
-        {renderButton}
+        <span className="float-right">
+          <Badge className="badge" size="small" count={notiCount}>
+            <Button className="btn btn-bell" icon={<BellOutlined />} />
+          </Badge>
+          {renderButton}
+        </span>
+
         <Drawer
           title="Menu"
           placement="left"

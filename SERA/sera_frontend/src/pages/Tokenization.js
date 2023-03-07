@@ -198,7 +198,7 @@ const Tokenization = () => {
           icon={<FileAddOutlined />}
           onClick={showModal}
         >
-          Deploy
+          Deploy Token Contract
         </Button>
       </Row>
       <Divider />
