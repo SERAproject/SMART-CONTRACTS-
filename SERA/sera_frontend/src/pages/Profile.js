@@ -336,7 +336,7 @@ const Profile = () => {
       </Form>
       <Divider />
       <Button className="">Cancel</Button>
-      <Button className="margin-left-8" onClick={handleOk}>
+      <Button type="primary" className="margin-left-8" onClick={handleOk}>
         Submit
       </Button>
     </Row>
