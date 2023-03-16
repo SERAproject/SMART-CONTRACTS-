@@ -64,6 +64,7 @@ const CreateContract = () => {
             materialItems: JSON.stringify(materialItems),
             buspartner: res1.data.data.Trade_name,
             wallet_address: account,
+            status: 0,
           }
         );
         if (res.data.status_code === 200) {
@@ -422,7 +423,6 @@ const CreateContract = () => {
                 </Collapse>
               </Col>
             </Row>
-            <Divider />
             <Button
               className="black-button float-left margin-bottom-20"
               onClick={onAddMaterial}
@@ -430,8 +430,14 @@ const CreateContract = () => {
               Add Material
             </Button>
             <Divider />
-            <Button className="float-left">Cancel</Button>
+
+            <Button shape="round" size="large" className="float-left ">
+              Cancel
+            </Button>
             <Button
+              type="primary"
+              shape="round"
+              size="large"
               className="float-left margin-left-8"
               onClick={handleSubmitRFQ}
             >

@@ -16,6 +16,7 @@ const items = [
     "group_landing_page",
     null,
     [
+      getItem(<Link to="/profile">My Account</Link>, "profile"),
       getItem(
         <Link to="/business-ecosystem">Business Ecosystem</Link>,
         "business_ecosystem"
@@ -59,6 +60,10 @@ const items = [
       getItem(
         <Link to="/shipment-management">Shipment Management</Link>,
         "shipment-management"
+      ),
+      getItem(
+        <Link to="/document-management">Document Management</Link>,
+        "document-management"
       ),
     ],
     "group"

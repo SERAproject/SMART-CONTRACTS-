@@ -21,10 +21,10 @@
   height: 94px;
   padding-right: 30px;
   padding-left: 30px;
-  position: -webkit-sticky;
-  position: sticky;
+  /* position: -webkit-sticky;
+  position: sticky !important;
   z-index: 1;
-  top: 0;
+  top: 0; */
 }
 
 .App-link {
@@ -64,6 +64,24 @@
   padding: 8px 15px;
   /* position: absolute; */
   /* right: 75px; */
+}
+
+.btn-bell {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #4bf0d3;
+  border-color: #4bf0d3;
+  border-radius: 5px;
+  width: 38px !important;
+  height: 40px;
+}
+
+.badge {
+  margin-right: 14px;
+  border: 0px;
+}
+
+.margin-right-8 {
+  margin-right: 8px;
 }
 
 @media (min-width: 992px) {
