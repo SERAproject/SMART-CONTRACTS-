@@ -36,6 +36,11 @@ contract Tra is Ownable {
         uint256 token_amount;
     }
 
+    struct Document {
+        address to;
+        string filehash;
+    }
+
     event Log(string text);
 
     uint256 public shipment_id;
@@ -49,6 +54,7 @@ contract Tra is Ownable {
     mapping(uint256 => uint256) public invoice_list;
     mapping(address => uint256) public shipment_list;
     mapping(address => uint256) public success_shipment_list;
+    mapping(address => Document) public document_list;
 
     constructor() {
         shipment_id = 0;
@@ -134,5 +140,9 @@ contract Tra is Ownable {
         } else {
             return 0;
         }
+    }
+
+    function transferDocument(address to, string memory filehash) public{
+        document_list[msg.sender] = Document(to, filehash);
     }
 }
