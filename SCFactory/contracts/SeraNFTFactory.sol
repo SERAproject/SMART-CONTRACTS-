@@ -19,14 +19,26 @@ contract SeraNFTFactory {
     uint256 public token_count;
     mapping(uint256 => Token) public token;
 
-    constructor () {
-      token_count = 0;
+    constructor() {
+        token_count = 0;
     }
 
-    function createSeraNFT (string memory invoice_id, string memory token_name, string memory token_symbol, string memory contract_type) public {
-      SeraNFT seraNFT = new SeraNFT();
-      token_count ++;
-      token[token_count] = Token(msg.sender, address(seraNFT), invoice_id, token_name, token_symbol, contract_type);
-      seraNFT.transferOwnership(msg.sender);
+    function createSeraNFT(
+        string memory invoice_id,
+        string memory token_name,
+        string memory token_symbol,
+        string memory contract_type
+    ) public {
+        SeraNFT seraNFT = new SeraNFT();
+        token_count++;
+        token[token_count] = Token(
+            msg.sender,
+            address(seraNFT),
+            invoice_id,
+            token_name,
+            token_symbol,
+            contract_type
+        );
+        seraNFT.transferOwnership(msg.sender);
     }
 }
