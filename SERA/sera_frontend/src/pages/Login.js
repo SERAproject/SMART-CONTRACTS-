@@ -60,7 +60,7 @@ const Login = () => {
     } = state;
 
     if (activeKey === "tab_signin") {
-      if (!active || email === "" || password === "") {
+      if (!active) {
         message.error("Please input your info correctly!", 5);
         setValid(true);
         return;
@@ -69,8 +69,7 @@ const Login = () => {
         const res = await axios.post(
           `${process.env.REACT_APP_IP_ADDRESS}/v1/signin`,
           {
-            email: state.email,
-            password: state.password,
+            wallet_address: account
           }
         );
         if (res.data.status_code === 200) {
@@ -159,45 +158,7 @@ const Login = () => {
       key: "tab_signin",
       label: `Sign In`,
       children: (
-        <Form validateMessages={validateMessages}>
-          <Form.Item
-            name={["Email"]}
-            rules={[
-              {
-                type: "email",
-              },
-            ]}
-            style={{ marginBottom: "0px" }}
-          >
-            <Input
-              placeholder="Email"
-              className="auth-input-style"
-              name="email"
-              value={state.email}
-              onChange={handleInputChange}
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-            style={{ marginBottom: "0px" }}
-          >
-            <Input.Password
-              placeholder="input password"
-              className="auth-input-style"
-              name="password"
-              value={state.password}
-              onChange={handleInputChange}
-            />
-          </Form.Item>
-          {renderButton}
-        </Form>
+        <>{renderButton}</>
       ),
     },
     {
