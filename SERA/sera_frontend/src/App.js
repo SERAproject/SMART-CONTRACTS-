@@ -31,9 +31,6 @@ const { Sider, Content } = Layout;
 
 const siderStyle = {
   height: "calc(100vh - 94px)",
-  position: "-webkit-sticky !important;",
-  position: "sticky !important;",
-  top: 0,
 };
 
 const contentStyle = {
@@ -159,11 +156,10 @@ const App = () => {
     );
     if (res.data.status_code === 200) {
       await setNotiCount(res.data.data.length);
-      console.log(res.data.data);
       let tmp = [];
       res.data.data.map((item) => {
         tmp.push({
-          label: item.Buspartner + " was added new RFQ." ,
+          label: item.Buspartner + " was added new RFQ.",
           key: item.MaterialId,
         });
       });
