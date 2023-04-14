@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { ethers } from "ethers";
-import { useWeb3React } from "@web3-react/core";
 import {
   Row,
+  Col,
+  Typography,
   Divider,
   Descriptions,
   Button,
@@ -16,11 +15,15 @@ import {
   Pagination,
   message,
 } from "antd";
+import axios from "axios";
 import { FileAddOutlined } from "@ant-design/icons";
-import { TRANSACTION_ERROR } from "../utils/messages";
+import { ethers } from "ethers";
+import { useWeb3React } from "@web3-react/core";
 import trackAbi from "../abis/trackingAbi.json";
 import "./page.css";
+import { TRANSACTION_ERROR } from "../utils/messages";
 
+const { Title } = Typography;
 const { Search } = Input;
 
 const Invoices = () => {
@@ -155,7 +158,7 @@ const Invoices = () => {
       }
       await setData(tmp);
     } catch (e) {
-      message.error(TRANSACTION_ERROR, 5);
+      // message.error(TRANSACTION_ERROR, 5);
       console.log(e);
       setLoading(false);
     }
