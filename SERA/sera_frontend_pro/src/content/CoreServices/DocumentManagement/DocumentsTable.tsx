@@ -14,44 +14,54 @@ import {
   Tooltip,
   Divider
 } from '@mui/material';
-import { AuthParty } from '@/models/applications/auth_parties';
+import Label from '@/components/Label';
+import { Document, DocumentStatus } from '@/models/core-services/documents';
 import { SeraContext } from '@/contexts/SeraContext';
 
-const authPartiesData: AuthParty[] = [
+const documentsData: Document[] = [
   {
-    id: '1',
-    t_name: 'Trade 3DC',
-    country: 'Canada',
-    state_town: 'Toronto',
-    email: 'testman3dc@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'
-  },
-  {
-    id: '2',
-    t_name: 'Trade 166',
-    country: 'Canada',
-    state_town: 'Toronto',
-    email: 'testman166@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x1663CE5485ef8c7b8C390F1132e716d84fC357E8'
+    partner: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc',
+    document: null,
+    document_hash: 'QmaZe7nXMoatJ9vHSdwQmejKhPNAqc7CMWJoBbuSzRoVts',
+    status: 'pending'
   }
 ];
 
-const applyPagination = (
-  authParties: AuthParty[],
-  page: number,
-  limit: number
-): AuthParty[] => {
-  return authParties.slice(page * limit, page * limit + limit);
+const getStatusLabel = (documentStatus: DocumentStatus): JSX.Element => {
+  const map = {
+    failed: {
+      text: 'Failed',
+      color: 'error'
+    },
+    completed: {
+      text: 'Completed',
+      color: 'success'
+    },
+    pending: {
+      text: 'Pending',
+      color: 'warning'
+    }
+  };
+
+  const { text, color }: any = map[documentStatus];
+
+  return <Label color={color}>{text}</Label>;
 };
 
-const AuthPartysTable = () => {
+const applyPagination = (
+  documents: Document[],
+  page: number,
+  limit: number
+): Document[] => {
+  return documents.slice(page * limit, page * limit + limit);
+};
+
+const DocumentsTable = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [searchText, setSearchText] = useState<string>('');
-  const { authParties, SetAuthParties } = useContext(SeraContext);
-  const [filteredParties, setFilteredParties] = useState<AuthParty[]>([]);
+  const { documents, SetDocuments } = useContext(SeraContext);
+  const [filteredPartner, setFilteredPartner] = useState<Document[]>([]);
 
   const handlePageChange = (_event: any, newPage: number): void => {
     setPage(newPage);
@@ -63,16 +73,20 @@ const AuthPartysTable = () => {
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchText(event.target.value);
-    setFilteredParties(
-      authParties.filter((item) => item.w_address.includes(event.target.value))
+    setFilteredPartner(
+      documents.filter((item) => item.partner.includes(event.target.value))
     );
   };
 
-  const paginatedAuthParty = applyPagination(filteredParties, page, limit);
+  const paginatedBusinessPartner = applyPagination(
+    filteredPartner,
+    page,
+    limit
+  );
 
   useEffect(() => {
-    SetAuthParties(authPartiesData);
-    setFilteredParties(authPartiesData);
+    SetDocuments(documentsData);
+    setFilteredPartner(documentsData);
   }, []);
 
   return (
@@ -97,75 +111,18 @@ const AuthPartysTable = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Trade Name</TableCell>
-              <TableCell>Country</TableCell>
-              <TableCell>State/Town</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Phone Number</TableCell>
-              <TableCell>Wallet Address</TableCell>
+              <TableCell align="center">Partner</TableCell>
+              <TableCell>Document</TableCell>
+              <TableCell>Document Hash</TableCell>
+              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedAuthParty.map((item) => {
+            {paginatedBusinessPartner.map((document, index) => {
               return (
-                <TableRow hover key={item.id}>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {item.t_name}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {item.country}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {item.state_town}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {item.email}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {item.phone}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Tooltip title={item.w_address} placement="top-start">
+                <TableRow hover key={index}>
+                  <TableCell align="center">
+                    <Tooltip title={document.partner} placement="top-start">
                       <Typography
                         variant="body1"
                         fontWeight="bold"
@@ -173,11 +130,44 @@ const AuthPartysTable = () => {
                         gutterBottom
                         noWrap
                       >
-                        {item.w_address.substring(0, 5) +
+                        {document.partner.substring(0, 5) +
                           ' ... ' +
-                          item.w_address.substring(38)}
+                          document.partner.substring(38)}
                       </Typography>
                     </Tooltip>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {document.document}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {document.document_hash}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {getStatusLabel(document.status)}
+                    </Typography>
                   </TableCell>
                 </TableRow>
               );
@@ -188,7 +178,7 @@ const AuthPartysTable = () => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={authParties.length}
+          count={documents.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -200,4 +190,4 @@ const AuthPartysTable = () => {
   );
 };
 
-export default AuthPartysTable;
+export default DocumentsTable;

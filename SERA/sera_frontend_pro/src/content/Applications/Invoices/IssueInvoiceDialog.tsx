@@ -45,7 +45,7 @@ const AddPartnerDialog = () => {
         fullWidth={true}
       >
         <DialogTitle>
-          <Typography variant="h3">Add Business Partner</Typography>
+          <Typography variant="h3">Issue Invoice</Typography>
         </DialogTitle>
         <DialogContent>
           <TextField

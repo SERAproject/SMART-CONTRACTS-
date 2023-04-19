@@ -14,44 +14,38 @@ import {
   Tooltip,
   Divider
 } from '@mui/material';
-import { AuthParty } from '@/models/applications/auth_parties';
 import { SeraContext } from '@/contexts/SeraContext';
+import { Materials } from '@/models/applications/materials';
 
-const authPartiesData: AuthParty[] = [
+const materialsData: Materials[] = [
   {
     id: '1',
-    t_name: 'Trade 3DC',
-    country: 'Canada',
-    state_town: 'Toronto',
-    email: 'testman3dc@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'
+    name: 'MATERIAL1',
+    pub_number: 'MAT1',
+    producer: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'
   },
   {
     id: '2',
-    t_name: 'Trade 166',
-    country: 'Canada',
-    state_town: 'Toronto',
-    email: 'testman166@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x1663CE5485ef8c7b8C390F1132e716d84fC357E8'
+    name: 'MATERIAL1',
+    pub_number: 'MAT1',
+    producer: '0x3dC4696671ca3cb6C34674A0c1729bbFcC2weDdc'
   }
 ];
 
 const applyPagination = (
-  authParties: AuthParty[],
+  materials: Materials[],
   page: number,
   limit: number
-): AuthParty[] => {
-  return authParties.slice(page * limit, page * limit + limit);
+): Materials[] => {
+  return materials.slice(page * limit, page * limit + limit);
 };
 
-const AuthPartysTable = () => {
+const MaterialssTable = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [searchText, setSearchText] = useState<string>('');
-  const { authParties, SetAuthParties } = useContext(SeraContext);
-  const [filteredParties, setFilteredParties] = useState<AuthParty[]>([]);
+  const { materials, SetMaterials } = useContext(SeraContext);
+  const [filteredMaterials, setFilteredMaterial] = useState<Materials[]>([]);
 
   const handlePageChange = (_event: any, newPage: number): void => {
     setPage(newPage);
@@ -63,16 +57,16 @@ const AuthPartysTable = () => {
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchText(event.target.value);
-    setFilteredParties(
-      authParties.filter((item) => item.w_address.includes(event.target.value))
+    setFilteredMaterial(
+      materials.filter((item) => item.producer.includes(event.target.value))
     );
   };
 
-  const paginatedAuthParty = applyPagination(filteredParties, page, limit);
+  const paginatedMaterials = applyPagination(filteredMaterials, page, limit);
 
   useEffect(() => {
-    SetAuthParties(authPartiesData);
-    setFilteredParties(authPartiesData);
+    SetMaterials(materialsData);
+    setFilteredMaterial(materialsData);
   }, []);
 
   return (
@@ -97,19 +91,17 @@ const AuthPartysTable = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Trade Name</TableCell>
-              <TableCell>Country</TableCell>
-              <TableCell>State/Town</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Phone Number</TableCell>
-              <TableCell>Wallet Address</TableCell>
+              <TableCell align="center">Material ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Publish Number</TableCell>
+              <TableCell>Producer</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedAuthParty.map((item) => {
+            {paginatedMaterials.map((material) => {
               return (
-                <TableRow hover key={item.id}>
-                  <TableCell>
+                <TableRow hover key={material.id}>
+                  <TableCell align="center">
                     <Typography
                       variant="body1"
                       fontWeight="bold"
@@ -117,7 +109,7 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.t_name}
+                      {material.id}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -128,7 +120,7 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.country}
+                      {material.name}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -139,33 +131,11 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.state_town}
+                      {material.pub_number}
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {item.email}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {item.phone}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Tooltip title={item.w_address} placement="top-start">
+                    <Tooltip title={material.producer} placement="top-start">
                       <Typography
                         variant="body1"
                         fontWeight="bold"
@@ -173,9 +143,9 @@ const AuthPartysTable = () => {
                         gutterBottom
                         noWrap
                       >
-                        {item.w_address.substring(0, 5) +
+                        {material.producer.substring(0, 5) +
                           ' ... ' +
-                          item.w_address.substring(38)}
+                          material.producer.substring(38)}
                       </Typography>
                     </Tooltip>
                   </TableCell>
@@ -188,7 +158,7 @@ const AuthPartysTable = () => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={authParties.length}
+          count={materials.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -200,4 +170,4 @@ const AuthPartysTable = () => {
   );
 };
 
-export default AuthPartysTable;
+export default MaterialssTable;

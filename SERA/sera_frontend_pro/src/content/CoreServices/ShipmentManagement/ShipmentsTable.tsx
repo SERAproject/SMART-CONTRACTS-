@@ -14,44 +14,55 @@ import {
   Tooltip,
   Divider
 } from '@mui/material';
-import { AuthParty } from '@/models/applications/auth_parties';
+import Label from '@/components/Label';
+import { Shipment, ShipmentStatus } from '@/models/core-services/shipment';
 import { SeraContext } from '@/contexts/SeraContext';
 
-const authPartiesData: AuthParty[] = [
+const shipmentsData: Shipment[] = [
   {
-    id: '1',
-    t_name: 'Trade 3DC',
-    country: 'Canada',
-    state_town: 'Toronto',
-    email: 'testman3dc@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'
-  },
-  {
-    id: '2',
-    t_name: 'Trade 166',
-    country: 'Canada',
-    state_town: 'Toronto',
-    email: 'testman166@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x1663CE5485ef8c7b8C390F1132e716d84fC357E8'
+    po_id: '1',
+    importer: 'Trade 3DC',
+    delivery_term: null,
+    payment_term: '12000',
+    status: 'pending'
   }
 ];
 
-const applyPagination = (
-  authParties: AuthParty[],
-  page: number,
-  limit: number
-): AuthParty[] => {
-  return authParties.slice(page * limit, page * limit + limit);
+const getStatusLabel = (shipmentStatus: ShipmentStatus): JSX.Element => {
+  const map = {
+    failed: {
+      text: 'Failed',
+      color: 'error'
+    },
+    completed: {
+      text: 'Completed',
+      color: 'success'
+    },
+    pending: {
+      text: 'Pending',
+      color: 'warning'
+    }
+  };
+
+  const { text, color }: any = map[shipmentStatus];
+
+  return <Label color={color}>{text}</Label>;
 };
 
-const AuthPartysTable = () => {
+const applyPagination = (
+  shipments: Shipment[],
+  page: number,
+  limit: number
+): Shipment[] => {
+  return shipments.slice(page * limit, page * limit + limit);
+};
+
+const ShipmentsDialog = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [searchText, setSearchText] = useState<string>('');
-  const { authParties, SetAuthParties } = useContext(SeraContext);
-  const [filteredParties, setFilteredParties] = useState<AuthParty[]>([]);
+  const { shipments, SetShipments } = useContext(SeraContext);
+  const [filteredPartner, setFilteredPartner] = useState<Shipment[]>([]);
 
   const handlePageChange = (_event: any, newPage: number): void => {
     setPage(newPage);
@@ -63,16 +74,16 @@ const AuthPartysTable = () => {
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchText(event.target.value);
-    setFilteredParties(
-      authParties.filter((item) => item.w_address.includes(event.target.value))
+    setFilteredPartner(
+      shipments.filter((item) => item.importer.includes(event.target.value))
     );
   };
 
-  const paginatedAuthParty = applyPagination(filteredParties, page, limit);
+  const paginatedShipment = applyPagination(filteredPartner, page, limit);
 
   useEffect(() => {
-    SetAuthParties(authPartiesData);
-    setFilteredParties(authPartiesData);
+    SetShipments(shipmentsData);
+    setFilteredPartner(shipmentsData);
   }, []);
 
   return (
@@ -97,19 +108,18 @@ const AuthPartysTable = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Trade Name</TableCell>
-              <TableCell>Country</TableCell>
-              <TableCell>State/Town</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Phone Number</TableCell>
-              <TableCell>Wallet Address</TableCell>
+              <TableCell align="center">Purchase Order ID</TableCell>
+              <TableCell>Importer</TableCell>
+              <TableCell>Delivery Term</TableCell>
+              <TableCell>Payment Term</TableCell>
+              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedAuthParty.map((item) => {
+            {paginatedShipment.map((shipment, index) => {
               return (
-                <TableRow hover key={item.id}>
-                  <TableCell>
+                <TableRow hover key={index}>
+                  <TableCell align="center">
                     <Typography
                       variant="body1"
                       fontWeight="bold"
@@ -117,7 +127,7 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.t_name}
+                      {shipment.po_id}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -128,7 +138,7 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.country}
+                      {shipment.importer}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -139,7 +149,7 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.state_town}
+                      {shipment.delivery_term}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -150,7 +160,7 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.email}
+                      {shipment.payment_term}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -161,23 +171,8 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.phone}
+                      {getStatusLabel(shipment.status)}
                     </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Tooltip title={item.w_address} placement="top-start">
-                      <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
-                        gutterBottom
-                        noWrap
-                      >
-                        {item.w_address.substring(0, 5) +
-                          ' ... ' +
-                          item.w_address.substring(38)}
-                      </Typography>
-                    </Tooltip>
                   </TableCell>
                 </TableRow>
               );
@@ -188,7 +183,7 @@ const AuthPartysTable = () => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={authParties.length}
+          count={shipments.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -200,4 +195,4 @@ const AuthPartysTable = () => {
   );
 };
 
-export default AuthPartysTable;
+export default ShipmentsDialog;

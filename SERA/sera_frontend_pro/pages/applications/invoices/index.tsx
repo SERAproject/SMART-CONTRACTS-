@@ -4,10 +4,9 @@ import PageHeader from '@/content/Applications/Invoices/PageHeader';
 import PageTitleWrapper from '@/components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 import Footer from '@/components/Footer';
+import InvoicesTable from '@/content/Applications/Invoices/InvoicesTable';
 
-import RecentOrders from '@/content/Applications/Invoices/RecentOrders';
-
-function ApplicationsTransactions() {
+function ApplicationsInvoices() {
   return (
     <>
       <Head>
@@ -25,7 +24,7 @@ function ApplicationsTransactions() {
           spacing={3}
         >
           <Grid item xs={12}>
-            <RecentOrders />
+            <InvoicesTable />
           </Grid>
         </Grid>
       </Container>
@@ -34,8 +33,8 @@ function ApplicationsTransactions() {
   );
 }
 
-ApplicationsTransactions.getLayout = (page) => (
+ApplicationsInvoices.getLayout = (page) => (
   <SidebarLayout>{page}</SidebarLayout>
 );
 
-export default ApplicationsTransactions;
+export default ApplicationsInvoices;

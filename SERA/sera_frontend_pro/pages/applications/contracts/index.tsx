@@ -1,13 +1,35 @@
+import { useState, ChangeEvent } from 'react';
 import Head from 'next/head';
 import SidebarLayout from '@/layouts/SidebarLayout';
 import PageHeader from '@/content/Applications/Contracts/PageHeader';
 import PageTitleWrapper from '@/components/PageTitleWrapper';
-import { Grid, Container } from '@mui/material';
+import { Container, Tabs, Tab, Grid } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import Footer from '@/components/Footer';
 
-import RecentOrders from '@/content/Applications/Contracts/RecentOrders';
+import ProposalsTable from '@/content/Applications/Contracts/ProposalsTable';
+import RFQsTable from '@/content/Applications/Contracts/RFQsTable';
 
-function ApplicationsTransactions() {
+const TabsWrapper = styled(Tabs)(
+  () => `
+    .MuiTabs-scrollableX {
+      overflow-x: auto !important;
+    }
+`
+);
+
+function ApplicationsContracts() {
+  const [currentTab, setCurrentTab] = useState<string>('rfq');
+
+  const tabs = [
+    { value: 'rfq', label: 'Request For Quotation' },
+    { value: 'proposal', label: 'Proposal' }
+  ];
+
+  const handleTabsChange = (_event: ChangeEvent<{}>, value: string): void => {
+    setCurrentTab(value);
+  };
+
   return (
     <>
       <Head>
@@ -25,7 +47,22 @@ function ApplicationsTransactions() {
           spacing={3}
         >
           <Grid item xs={12}>
-            <RecentOrders />
+            <TabsWrapper
+              onChange={handleTabsChange}
+              value={currentTab}
+              variant="scrollable"
+              scrollButtons="auto"
+              textColor="primary"
+              indicatorColor="primary"
+            >
+              {tabs.map((tab) => (
+                <Tab key={tab.value} label={tab.label} value={tab.value} />
+              ))}
+            </TabsWrapper>
+          </Grid>
+          <Grid item xs={12}>
+            {currentTab === 'rfq' && <RFQsTable />}
+            {currentTab === 'proposal' && <ProposalsTable />}
           </Grid>
         </Grid>
       </Container>
@@ -34,8 +71,8 @@ function ApplicationsTransactions() {
   );
 }
 
-ApplicationsTransactions.getLayout = (page) => (
+ApplicationsContracts.getLayout = (page) => (
   <SidebarLayout>{page}</SidebarLayout>
 );
 
-export default ApplicationsTransactions;
+export default ApplicationsContracts;

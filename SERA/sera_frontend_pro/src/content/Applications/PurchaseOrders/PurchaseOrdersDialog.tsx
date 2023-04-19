@@ -17,7 +17,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Typography from '@mui/material/Typography';
 import { SeraContext } from '@/contexts/SeraContext';
 
-const AddPartnerDialog = () => {
+const PurchaseOrderDialog = () => {
   const { openAPDialog, busPartners, handleCloseAPDialog } =
     useContext(SeraContext);
   const [wallet_address, setWalletAddress] = useState<string>('');
@@ -45,7 +45,7 @@ const AddPartnerDialog = () => {
         fullWidth={true}
       >
         <DialogTitle>
-          <Typography variant="h3">Add Business Partner</Typography>
+          <Typography variant="h3">Create Purchase Order</Typography>
         </DialogTitle>
         <DialogContent>
           <TextField
@@ -232,4 +232,4 @@ const AddPartnerDialog = () => {
   );
 };
 
-export default AddPartnerDialog;
+export default PurchaseOrderDialog;

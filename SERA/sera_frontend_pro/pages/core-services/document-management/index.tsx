@@ -1,17 +1,17 @@
 import Head from 'next/head';
 import SidebarLayout from '@/layouts/SidebarLayout';
-import PageHeader from '@/content/Management/Transactions/PageHeader';
+import PageHeader from '@/content/CoreServices/DocumentManagement/PageHeader';
 import PageTitleWrapper from '@/components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 import Footer from '@/components/Footer';
 
-import RecentOrders from '@/content/Management/Transactions/RecentOrders';
+import DocumentsTable from '@/content/CoreServices/DocumentManagement/DocumentsTable';
 
-function ApplicationsTransactions() {
+function CoreServicesDocumentManagement() {
   return (
     <>
       <Head>
-        <title>Transactions - Applications</title>
+        <title>Document Management - Core Services</title>
       </Head>
       <PageTitleWrapper>
         <PageHeader />
@@ -25,7 +25,7 @@ function ApplicationsTransactions() {
           spacing={3}
         >
           <Grid item xs={12}>
-            <RecentOrders />
+            <DocumentsTable />
           </Grid>
         </Grid>
       </Container>
@@ -34,8 +34,8 @@ function ApplicationsTransactions() {
   );
 }
 
-ApplicationsTransactions.getLayout = (page) => (
+CoreServicesDocumentManagement.getLayout = (page) => (
   <SidebarLayout>{page}</SidebarLayout>
 );
 
-export default ApplicationsTransactions;
+export default CoreServicesDocumentManagement;
