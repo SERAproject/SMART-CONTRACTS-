@@ -38,7 +38,7 @@ function Overview() {
   return (
     <OverviewWrapper>
       <Head>
-        <title>Tokyo Free Black NextJS Typescript Admin Dashboard</title>
+        <title>SERA Admin Dashboard</title>
       </Head>
       <HeaderWrapper>
         <Container maxWidth="lg">
@@ -54,11 +54,11 @@ function Overview() {
               <Box>
                 <Button
                   component={Link}
-                  href="/dashboards/tasks"
+                  href="/applications/business-ecosystem"
                   variant="contained"
                   sx={{ ml: 2 }}
                 >
-                  Live Preview
+                  Launch the app
                 </Button>
               </Box>
             </Box>

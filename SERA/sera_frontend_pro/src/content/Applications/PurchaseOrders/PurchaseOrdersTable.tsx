@@ -11,54 +11,72 @@ import {
   TableRow,
   TableContainer,
   Typography,
-  Rating,
   Tooltip,
   Divider
 } from '@mui/material';
-import { BusinessPartner } from '@/models/applications/business_partner';
+import Label from '@/components/Label';
+import {
+  PurhcaseOrder,
+  PurchaseOrderStatus
+} from '@/models/applications/purhcase_orders';
 import { SeraContext } from '@/contexts/SeraContext';
 
-const busPartner: BusinessPartner[] = [
+const purOrderData: PurhcaseOrder[] = [
   {
-    id: '1',
-    t_name: 'Trade 3DC',
-    l_name: 'Legal 3DC',
-    country: 'Canada',
-    state_town: 'Toronto',
-    b_number: 'BDS332',
-    email: 'testman3dc@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc',
-    reputation: 2
+    pr_id: '1',
+    c_id: '2',
+    buyer: 'Trade 3DC',
+    supplier: 'Trade 166',
+    delivery_term: null,
+    payment_term: '12323',
+    status: 'pending'
   },
   {
-    id: '2',
-    t_name: 'Trade 166',
-    l_name: 'Legal 166',
-    country: 'Canada',
-    state_town: 'Toronto',
-    b_number: 'TR 166',
-    email: 'testman166@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x1663CE5485ef8c7b8C390F1132e716d84fC357E8',
-    reputation: 2
+    pr_id: '2',
+    c_id: '3',
+    buyer: 'Trade 3DC',
+    supplier: 'Trade 166',
+    delivery_term: null,
+    payment_term: '12323',
+    status: 'completed'
   }
 ];
 
-const applyPagination = (
-  busPartners: BusinessPartner[],
-  page: number,
-  limit: number
-): BusinessPartner[] => {
-  return busPartners.slice(page * limit, page * limit + limit);
+const getStatusLabel = (purOrderStatus: PurchaseOrderStatus): JSX.Element => {
+  const map = {
+    failed: {
+      text: 'Failed',
+      color: 'error'
+    },
+    completed: {
+      text: 'Completed',
+      color: 'success'
+    },
+    pending: {
+      text: 'Pending',
+      color: 'warning'
+    }
+  };
+
+  const { text, color }: any = map[purOrderStatus];
+
+  return <Label color={color}>{text}</Label>;
 };
 
-const BusinessPartnersTable = () => {
+const applyPagination = (
+  purchaseOrders: PurhcaseOrder[],
+  page: number,
+  limit: number
+): PurhcaseOrder[] => {
+  return purchaseOrders.slice(page * limit, page * limit + limit);
+};
+
+const PurhcaseOrdersTable = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [searchText, setSearchText] = useState<string>('');
-  const { busPartners, SetBusPartners } = useContext(SeraContext);
-  const [filteredPartner, setFilteredPartner] = useState<BusinessPartner[]>([]);
+  const { purchaseOrders, SetPurchaseOrders } = useContext(SeraContext);
+  const [filteredPartner, setFilteredPartner] = useState<PurhcaseOrder[]>([]);
 
   const handlePageChange = (_event: any, newPage: number): void => {
     setPage(newPage);
@@ -71,7 +89,7 @@ const BusinessPartnersTable = () => {
   const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchText(event.target.value);
     setFilteredPartner(
-      busPartners.filter((item) => item.w_address.includes(event.target.value))
+      purchaseOrders.filter((item) => item.buyer.includes(event.target.value))
     );
   };
 
@@ -82,8 +100,8 @@ const BusinessPartnersTable = () => {
   );
 
   useEffect(() => {
-    SetBusPartners(busPartner);
-    setFilteredPartner(busPartner);
+    SetPurchaseOrders(purOrderData);
+    setFilteredPartner(purOrderData);
   }, []);
 
   return (
@@ -108,22 +126,20 @@ const BusinessPartnersTable = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Trade Name</TableCell>
-              <TableCell>Legal Name</TableCell>
-              <TableCell>Country</TableCell>
-              <TableCell>State/Town</TableCell>
-              <TableCell>Building Number</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Phone Number</TableCell>
-              <TableCell>Wallet Address</TableCell>
-              <TableCell>Reputation</TableCell>
+              <TableCell align="center">Purchase Order ID</TableCell>
+              <TableCell align="center">Contract ID</TableCell>
+              <TableCell>Buyer</TableCell>
+              <TableCell>Supplier</TableCell>
+              <TableCell>Delivery Term</TableCell>
+              <TableCell>Payment Term</TableCell>
+              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedBusinessPartner.map((busPartner) => {
+            {paginatedBusinessPartner.map((purOrder, index) => {
               return (
-                <TableRow hover key={busPartner.id}>
-                  <TableCell>
+                <TableRow hover key={index}>
+                  <TableCell align="center">
                     <Typography
                       variant="body1"
                       fontWeight="bold"
@@ -131,7 +147,18 @@ const BusinessPartnersTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {busPartner.t_name}
+                      {purOrder.pr_id}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {purOrder.c_id}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -142,76 +169,14 @@ const BusinessPartnersTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {busPartner.l_name}
+                      {purOrder.buyer}
                     </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
+                    <Tooltip
+                      title={'0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'}
+                      placement="top-start"
                     >
-                      {busPartner.country}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {busPartner.state_town}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {busPartner.b_number}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {busPartner.email}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {busPartner.phone}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Tooltip title={busPartner.w_address} placement="top-start">
-                      <Typography
-                        variant="body1"
-                        fontWeight="bold"
-                        color="text.primary"
-                        gutterBottom
-                        noWrap
-                      >
-                        {busPartner.w_address.substring(0, 5) +
-                          ' ... ' +
-                          busPartner.w_address.substring(38)}
+                      <Typography variant="body2" color="text.secondary" noWrap>
+                        0x3dC ... Ddc
                       </Typography>
                     </Tooltip>
                   </TableCell>
@@ -223,11 +188,48 @@ const BusinessPartnersTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      <Rating
-                        name="read-only"
-                        value={busPartner.reputation}
-                        readOnly
-                      />
+                      {purOrder.supplier}
+                    </Typography>
+                    <Tooltip
+                      title={'0x1663CE5485ef8c7b8C390F1132e716d84fC357E8'}
+                      placement="top-start"
+                    >
+                      <Typography variant="body2" color="text.secondary" noWrap>
+                        0x166 ... 57E8
+                      </Typography>
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {purOrder.delivery_term}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {purOrder.payment_term}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {getStatusLabel(purOrder.status)}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -239,7 +241,7 @@ const BusinessPartnersTable = () => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={busPartners.length}
+          count={purchaseOrders.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -251,4 +253,4 @@ const BusinessPartnersTable = () => {
   );
 };
 
-export default BusinessPartnersTable;
+export default PurhcaseOrdersTable;

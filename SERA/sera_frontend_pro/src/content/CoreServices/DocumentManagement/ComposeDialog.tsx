@@ -17,7 +17,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Typography from '@mui/material/Typography';
 import { SeraContext } from '@/contexts/SeraContext';
 
-const AddPartnerDialog = () => {
+const ComposeDialog = () => {
   const { openAPDialog, busPartners, handleCloseAPDialog } =
     useContext(SeraContext);
   const [wallet_address, setWalletAddress] = useState<string>('');
@@ -232,4 +232,4 @@ const AddPartnerDialog = () => {
   );
 };
 
-export default AddPartnerDialog;
+export default ComposeDialog;

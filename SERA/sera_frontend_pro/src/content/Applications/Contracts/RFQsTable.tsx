@@ -14,44 +14,34 @@ import {
   Tooltip,
   Divider
 } from '@mui/material';
-import { AuthParty } from '@/models/applications/auth_parties';
+import { RFQ } from '@/models/applications/contracts';
 import { SeraContext } from '@/contexts/SeraContext';
 
-const authPartiesData: AuthParty[] = [
+const rfq: RFQ[] = [
   {
     id: '1',
-    t_name: 'Trade 3DC',
-    country: 'Canada',
-    state_town: 'Toronto',
-    email: 'testman3dc@gmail.com',
-    phone: '(+1) 392 493 2933',
+    buyer: 'Trade 3DC',
+    material: null,
     w_address: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'
   },
   {
     id: '2',
-    t_name: 'Trade 166',
-    country: 'Canada',
-    state_town: 'Toronto',
-    email: 'testman166@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x1663CE5485ef8c7b8C390F1132e716d84fC357E8'
+    buyer: 'Trade 3DC',
+    material: null,
+    w_address: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'
   }
 ];
 
-const applyPagination = (
-  authParties: AuthParty[],
-  page: number,
-  limit: number
-): AuthParty[] => {
-  return authParties.slice(page * limit, page * limit + limit);
+const applyPagination = (rfqs: RFQ[], page: number, limit: number): RFQ[] => {
+  return rfqs.slice(page * limit, page * limit + limit);
 };
 
-const AuthPartysTable = () => {
+const RFQsTable = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [searchText, setSearchText] = useState<string>('');
-  const { authParties, SetAuthParties } = useContext(SeraContext);
-  const [filteredParties, setFilteredParties] = useState<AuthParty[]>([]);
+  const { rfqs, SetRFQs } = useContext(SeraContext);
+  const [filteredPartner, setFilteredRFQ] = useState<RFQ[]>([]);
 
   const handlePageChange = (_event: any, newPage: number): void => {
     setPage(newPage);
@@ -63,16 +53,16 @@ const AuthPartysTable = () => {
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchText(event.target.value);
-    setFilteredParties(
-      authParties.filter((item) => item.w_address.includes(event.target.value))
+    setFilteredRFQ(
+      rfqs.filter((item) => item.w_address.includes(event.target.value))
     );
   };
 
-  const paginatedAuthParty = applyPagination(filteredParties, page, limit);
+  const paginatedRFQ = applyPagination(filteredPartner, page, limit);
 
   useEffect(() => {
-    SetAuthParties(authPartiesData);
-    setFilteredParties(authPartiesData);
+    SetRFQs(rfq);
+    setFilteredRFQ(rfq);
   }, []);
 
   return (
@@ -97,19 +87,17 @@ const AuthPartysTable = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Trade Name</TableCell>
-              <TableCell>Country</TableCell>
-              <TableCell>State/Town</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Phone Number</TableCell>
+              <TableCell align="center">RFQ ID</TableCell>
+              <TableCell>Buyer</TableCell>
+              <TableCell>Material</TableCell>
               <TableCell>Wallet Address</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedAuthParty.map((item) => {
+            {paginatedRFQ.map((rfq) => {
               return (
-                <TableRow hover key={item.id}>
-                  <TableCell>
+                <TableRow hover key={rfq.id}>
+                  <TableCell align="center">
                     <Typography
                       variant="body1"
                       fontWeight="bold"
@@ -117,7 +105,7 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.t_name}
+                      {rfq.id}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -128,8 +116,16 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.country}
+                      {rfq.buyer}
                     </Typography>
+                    <Tooltip
+                      title={'0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'}
+                      placement="top-start"
+                    >
+                      <Typography variant="body2" color="text.secondary" noWrap>
+                        0x3dC ... Ddc
+                      </Typography>
+                    </Tooltip>
                   </TableCell>
                   <TableCell>
                     <Typography
@@ -139,33 +135,11 @@ const AuthPartysTable = () => {
                       gutterBottom
                       noWrap
                     >
-                      {item.state_town}
+                      {rfq.buyer}
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {item.email}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {item.phone}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Tooltip title={item.w_address} placement="top-start">
+                    <Tooltip title={rfq.w_address} placement="top-start">
                       <Typography
                         variant="body1"
                         fontWeight="bold"
@@ -173,9 +147,9 @@ const AuthPartysTable = () => {
                         gutterBottom
                         noWrap
                       >
-                        {item.w_address.substring(0, 5) +
+                        {rfq.w_address.substring(0, 5) +
                           ' ... ' +
-                          item.w_address.substring(38)}
+                          rfq.w_address.substring(38)}
                       </Typography>
                     </Tooltip>
                   </TableCell>
@@ -188,7 +162,7 @@ const AuthPartysTable = () => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={authParties.length}
+          count={rfqs.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -200,4 +174,4 @@ const AuthPartysTable = () => {
   );
 };
 
-export default AuthPartysTable;
+export default RFQsTable;
