@@ -13,6 +13,11 @@ module.exports = {
       url: "https://data-seed-prebsc-1-s1.binance.org:8545",
       accounts: [process.env.PRIVATE_KEY]
     },
+    bsc_mainnet: {
+      url: "https://bsc-dataseed.binance.org/",
+      accounts: [process.env.PRIVATE_KEY]
+    },
+
     // goerli: {
     //   url: `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
     //   accounts: [process.env.GOERLI_PRIVATE_KEY],
