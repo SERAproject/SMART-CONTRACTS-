@@ -191,63 +191,66 @@ const Contracts = () => {
       ];
 
       const results = await multicall.call(contractCallContext);
-      tmp = [];
-      const len = results.results.Tra.callsReturnContext.length;
-      for (let i = 0; i < len; i++) {
-        let contract = await results.results.Tra.callsReturnContext[i]
-          .returnValues;
-        if (contract[0] === account || contract[1] === account) {
-          const supplier = await axios.post(
-            `${process.env.REACT_APP_IP_ADDRESS}/v1/getuser`,
-            {
-              Wallet_address: contract[0],
-            }
-          );
-          const buyer = await axios.post(
-            `${process.env.REACT_APP_IP_ADDRESS}/v1/getuser`,
-            {
-              Wallet_address: contract[1],
-            }
-          );
-          let net_value = parseInt(
-            contract[4].hex * contract[5].hex +
-            contract[7].hex * contract[8].hex
-          );
-          tmp.push({
-            key: i,
-            contract_id: i,
-            buyer: (
-              <>
-                {buyer.data.data ? buyer.data.data.Trade_name : ""}
-                <br /> {contract[1]}
-              </>
-            ),
-            supplier: (
-              <>
-                {supplier.data.data ? supplier.data.data.Trade_name : ""}
-                <br />
-                {contract[0]}
-              </>
-            ),
-            delivery_term: (
-              <Descriptions column={1} size="small" bordered>
-                <Descriptions.Item label="Material">Quantity</Descriptions.Item>
-                <Descriptions.Item label={contract[3]}>
-                  {Number(contract[4].hex)}
-                </Descriptions.Item>
-                <Descriptions.Item label={contract[6]}>
-                  {Number(contract[7].hex)}
-                </Descriptions.Item>
-              </Descriptions>
-            ),
-            payment_term: net_value,
-            start_date: "2023/1/6",
-            end_date: "2023/1/16",
-            status: <Tag color="magenta">Active</Tag>,
-          });
+      if(results){
+        tmp = [];
+        const len = results.results.Tra.callsReturnContext.length;
+        for (let i = 0; i < len; i++) {
+          let contract = await results.results.Tra.callsReturnContext[i]
+            .returnValues;
+          if (contract[0] === account || contract[1] === account) {
+            const supplier = await axios.post(
+              `${process.env.REACT_APP_IP_ADDRESS}/v1/getuser`,
+              {
+                Wallet_address: contract[0],
+              }
+            );
+            const buyer = await axios.post(
+              `${process.env.REACT_APP_IP_ADDRESS}/v1/getuser`,
+              {
+                Wallet_address: contract[1],
+              }
+            );
+            let net_value = parseInt(
+              contract[4].hex * contract[5].hex +
+              contract[7].hex * contract[8].hex
+            );
+            tmp.push({
+              key: i,
+              contract_id: i,
+              buyer: (
+                <>
+                  {buyer.data.data ? buyer.data.data.Trade_name : ""}
+                  <br /> {contract[1]}
+                </>
+              ),
+              supplier: (
+                <>
+                  {supplier.data.data ? supplier.data.data.Trade_name : ""}
+                  <br />
+                  {contract[0]}
+                </>
+              ),
+              delivery_term: (
+                <Descriptions column={1} size="small" bordered>
+                  <Descriptions.Item label="Material">Quantity</Descriptions.Item>
+                  <Descriptions.Item label={contract[3]}>
+                    {Number(contract[4].hex)}
+                  </Descriptions.Item>
+                  <Descriptions.Item label={contract[6]}>
+                    {Number(contract[7].hex)}
+                  </Descriptions.Item>
+                </Descriptions>
+              ),
+              payment_term: net_value,
+              start_date: "2023/1/6",
+              end_date: "2023/1/16",
+              status: <Tag color="magenta">Active</Tag>,
+            });
+          }
         }
+        await setData(tmp);
       }
-      await setData(tmp);
+      
     } catch (e) {
       message.error(TRANSACTION_ERROR, 5);
       console.log(e);

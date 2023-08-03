@@ -391,38 +391,41 @@ const DocumentManagement = () => {
 
       const results = await multicall.call(contractCallContext);
 
-      const len = results.results.Provenance.callsReturnContext.length;
+      if(results) {
+        const len = results.results.Provenance.callsReturnContext.length;
 
-      tmp = [];
-      for (let i = 0; i < len; i++) {
-        let producer_address =
-          results.results.Provenance.callsReturnContext[i].returnValues[0];
-        let is_auth_producer = false;
-        is_auth_producer = await ProvContract.auth_producer(
-          producer_address > account ? producer_address : account,
-          producer_address > account ? account : producer_address
-        );
-        if (is_auth_producer) {
-          try {
-            const res = await axios.post(
-              `${process.env.REACT_APP_IP_ADDRESS}/v1/getuser`,
-              {
-                Wallet_address: producer_address,
+        tmp = [];
+        for (let i = 0; i < len; i++) {
+          let producer_address =
+            results.results.Provenance.callsReturnContext[i].returnValues[0];
+          let is_auth_producer = false;
+          is_auth_producer = await ProvContract.auth_producer(
+            producer_address > account ? producer_address : account,
+            producer_address > account ? account : producer_address
+          );
+          if (is_auth_producer) {
+            try {
+              const res = await axios.post(
+                `${process.env.REACT_APP_IP_ADDRESS}/v1/getuser`,
+                {
+                  Wallet_address: producer_address,
+                }
+              );
+              if (res.data.status_code === 200) {
+                tmp.push({
+                  label: res.data.data.Trade_name,
+                  value: producer_address
+                });
               }
-            );
-            if (res.data.status_code === 200) {
-              tmp.push({
-                label: res.data.data.Trade_name,
-                value: producer_address
-              });
+            } catch (e) {
+              message.error(SERVER_ERROR, 5);
+              console.log(e);
             }
-          } catch (e) {
-            message.error(SERVER_ERROR, 5);
-            console.log(e);
           }
         }
+        await setBusPartnerOp(tmp);
       }
-      await setBusPartnerOp(tmp);
+      
     }
     fectchBusParters();
     updateData("inbox");

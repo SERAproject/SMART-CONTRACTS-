@@ -97,26 +97,28 @@ const Materials = () => {
       ];
 
       const results = await multicall.call(contractCallContext);
+      if(results) {
+        let len = results.results.Provenance.callsReturnContext.length;
 
-      let len = results.results.Provenance.callsReturnContext.length;
-
-      tmp = [];
-
-      for (let i = 0; i < len; i++) {
-        if (results.results.Provenance.callsReturnContext[i].returnValues.length) {
-          let pro_pub_number =
-            results.results.Provenance.callsReturnContext[i].returnValues[0];
-          let material = await ProvContract.products(pro_pub_number);
-          if (material.producer_address === account)
-            tmp.push({
-              material: material.name,
-              pub_number: pro_pub_number,
-              producer: material.producer_address,
-            });
+        tmp = [];
+  
+        for (let i = 0; i < len; i++) {
+          if (results.results.Provenance.callsReturnContext[i].returnValues.length) {
+            let pro_pub_number =
+              results.results.Provenance.callsReturnContext[i].returnValues[0];
+            let material = await ProvContract.products(pro_pub_number);
+            if (material.producer_address === account)
+              tmp.push({
+                material: material.name,
+                pub_number: pro_pub_number,
+                producer: material.producer_address,
+              });
+          }
         }
+  
+        await setData(tmp);
       }
-
-      await setData(tmp);
+      
     } catch (e) {
       console.log("ERROR", e)
       setLoading(false)
