@@ -191,7 +191,7 @@ const Contracts = () => {
       ];
 
       const results = await multicall.call(contractCallContext);
-      if(results){
+      if(Object.keys(results.results).length){
         tmp = [];
         const len = results.results.Tra.callsReturnContext.length;
         for (let i = 0; i < len; i++) {

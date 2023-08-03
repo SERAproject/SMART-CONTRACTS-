@@ -97,7 +97,7 @@ const Materials = () => {
       ];
 
       const results = await multicall.call(contractCallContext);
-      if(results) {
+      if(Object.keys(results.results).length) {
         let len = results.results.Provenance.callsReturnContext.length;
 
         tmp = [];

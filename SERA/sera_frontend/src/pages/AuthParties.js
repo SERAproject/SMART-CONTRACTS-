@@ -135,8 +135,8 @@ const AuthParties = () => {
     ];
 
     const results = await multicall.call(contractCallContext);
-    console.log("--------", results)
-    if(results) {
+
+    if(Object.keys(results.results).length) {
       const len = results.results.Provenance.callsReturnContext.length;
 
       tmp = [];
