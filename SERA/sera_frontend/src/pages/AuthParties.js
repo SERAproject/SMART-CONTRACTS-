@@ -136,51 +136,54 @@ const AuthParties = () => {
 
     const results = await multicall.call(contractCallContext);
 
-    const len = results.results.Provenance.callsReturnContext.length;
+    if(Object.keys(results.results).length) {
+      const len = results.results.Provenance.callsReturnContext.length;
 
-    tmp = [];
-    for (let i = 0; i < len; i++) {
-      let producer_address =
-        results.results.Provenance.callsReturnContext[i].returnValues[0];
-      let is_auth_producer = false;
-      is_auth_producer = await ProvContract.auth_producer(
-        producer_address > account ? producer_address : account,
-        producer_address > account ? account : producer_address
-      );
-      if (is_auth_producer) {
-        try {
-          const res = await axios.post(
-            `${process.env.REACT_APP_IP_ADDRESS}/v1/getuser`,
-            {
-              Wallet_address: producer_address,
+      tmp = [];
+      for (let i = 0; i < len; i++) {
+        let producer_address =
+          results.results.Provenance.callsReturnContext[i].returnValues[0];
+        let is_auth_producer = false;
+        is_auth_producer = await ProvContract.auth_producer(
+          producer_address > account ? producer_address : account,
+          producer_address > account ? account : producer_address
+        );
+        if (is_auth_producer) {
+          try {
+            const res = await axios.post(
+              `${process.env.REACT_APP_IP_ADDRESS}/v1/getuser`,
+              {
+                Wallet_address: producer_address,
+              }
+            );
+            if (res.data.status_code === 200) {
+              let {
+                Email,
+                Trade_name,
+                Legal_name,
+                Country,
+                State_town,
+                Phone_number,
+              } = res.data.data;
+              tmp.push({
+                email: Email,
+                trade_name: Trade_name,
+                legal_name: Legal_name,
+                country: Country,
+                state_town: State_town,
+                phone_number: Phone_number,
+                wallet_address: producer_address,
+              });
             }
-          );
-          if (res.data.status_code === 200) {
-            let {
-              Email,
-              Trade_name,
-              Legal_name,
-              Country,
-              State_town,
-              Phone_number,
-            } = res.data.data;
-            tmp.push({
-              email: Email,
-              trade_name: Trade_name,
-              legal_name: Legal_name,
-              country: Country,
-              state_town: State_town,
-              phone_number: Phone_number,
-              wallet_address: producer_address,
-            });
+          } catch (e) {
+            message.error(SERVER_ERROR, 5);
+            console.log(e);
           }
-        } catch (e) {
-          message.error(SERVER_ERROR, 5);
-          console.log(e);
         }
       }
+      await setData(tmp);
     }
-    await setData(tmp);
+    
     setLoading(false);
   };
 
