@@ -1,5 +1,7 @@
 import * as React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
+
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from 'src/createEmotionCache';
 
@@ -14,7 +16,64 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400&display=swap"
           />
+          <link
+            rel="stylesheet"
+            href="/assets/vendor/bootstrap/css/bootstrap.min.css"
+          />
+          <link rel="stylesheet" href="/assets/vendor/aos/aos.css" />
+          <link
+            rel="stylesheet"
+            href="/assets/vendor/fontawesome/all.min.css"
+          />
+          <link
+            rel="stylesheet"
+            href="/assets/vendor/themify-icons/themify-icons.css"
+          />
+          <link rel="stylesheet" href="/assets/css/style.css" />
+
+          <script
+            type="text/javascript"
+            src="/assets/vendor/jquery-3.1.1.min.js"
+            async
+          ></script>
+
+          <script
+            type="text/javascript"
+            src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"
+            async
+          ></script>
+
+          <script
+            type="text/javascript"
+            src="/assets/vendor/aos/aos.js"
+            async
+          ></script>
+
+          <script
+            type="text/javascript"
+            src="/assets/vendor/jQuery.countdown-master/dist/jquery.countdown.min.js"
+            async
+          ></script>
+
+          <script
+            type="text/javascript"
+            src="/assets/vendor/chart.js/Chart.min.js"
+            async
+          ></script>
+
+          <script
+            type="text/javascript"
+            src="/assets/js/charts.js"
+            async
+          ></script>
+
+          <script
+            type="text/javascript"
+            src="/assets/js/scripts.js"
+            async
+          ></script>
         </Head>
+
         <body>
           <Main />
           <NextScript />
