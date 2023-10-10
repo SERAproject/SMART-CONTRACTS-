@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, useContext } from 'react';
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 import {
   Box,
   Card,
@@ -12,35 +12,35 @@ import {
   TableContainer,
   Typography,
   Tooltip,
-  Divider
-} from '@mui/material';
-import Label from '@/components/Label';
-import { Document, DocumentStatus } from '@/models/core-services/documents';
-import { SeraContext } from '@/contexts/SeraContext';
+  // Divider,
+} from "@mui/material";
+import Label from "@/components/Label";
+import { Document, DocumentStatus } from "@/models/core-services/documents";
+import { SeraContext } from "@/contexts/SeraContext";
 
 const documentsData: Document[] = [
   {
-    partner: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc',
+    partner: "0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc",
     document: null,
-    document_hash: 'QmaZe7nXMoatJ9vHSdwQmejKhPNAqc7CMWJoBbuSzRoVts',
-    status: 'pending'
-  }
+    document_hash: "QmaZe7nXMoatJ9vHSdwQmejKhPNAqc7CMWJoBbuSzRoVts",
+    status: "pending",
+  },
 ];
 
 const getStatusLabel = (documentStatus: DocumentStatus): JSX.Element => {
   const map = {
     failed: {
-      text: 'Failed',
-      color: 'error'
+      text: "Failed",
+      color: "error",
     },
     completed: {
-      text: 'Completed',
-      color: 'success'
+      text: "Completed",
+      color: "success",
     },
     pending: {
-      text: 'Pending',
-      color: 'warning'
-    }
+      text: "Pending",
+      color: "warning",
+    },
   };
 
   const { text, color }: any = map[documentStatus];
@@ -59,7 +59,7 @@ const applyPagination = (
 const DocumentsTable = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
-  const [searchText, setSearchText] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>("");
   const { documents, SetDocuments } = useContext(SeraContext);
   const [filteredPartner, setFilteredPartner] = useState<Document[]>([]);
 
@@ -94,7 +94,7 @@ const DocumentsTable = () => {
       <Box
         component="form"
         sx={{
-          '& > :not(style)': { m: 1, width: '30%', float: 'right' }
+          "& > :not(style)": { m: 1, width: "30%", float: "right" },
         }}
         noValidate
         autoComplete="off"
@@ -106,7 +106,7 @@ const DocumentsTable = () => {
           onChange={handleSearch}
         />
       </Box>
-      <Divider />
+      {/* <Divider /> */}
       <TableContainer>
         <Table>
           <TableHead>
@@ -131,7 +131,7 @@ const DocumentsTable = () => {
                         noWrap
                       >
                         {document.partner.substring(0, 5) +
-                          ' ... ' +
+                          " ... " +
                           document.partner.substring(38)}
                       </Typography>
                     </Tooltip>

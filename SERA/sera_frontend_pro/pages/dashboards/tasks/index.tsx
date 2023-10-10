@@ -1,28 +1,28 @@
-import Head from 'next/head';
-import SidebarLayout from '@/layouts/SidebarLayout';
-import { ChangeEvent, useState } from 'react';
-import PageHeader from '@/content/Dashboards/Tasks/PageHeader';
-import Footer from '@/components/Footer';
+import Head from "next/head";
+import SidebarLayout from "@/layouts/SidebarLayout";
+import { ChangeEvent, useState } from "react";
+import PageHeader from "@/content/Dashboards/Tasks/PageHeader";
+import Footer from "@/components/Footer";
 import {
   Grid,
   Tab,
   Tabs,
-  Divider,
+  // Divider,
   Container,
   Card,
   Box,
   useTheme,
-  styled
-} from '@mui/material';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
+  styled,
+} from "@mui/material";
+import PageTitleWrapper from "@/components/PageTitleWrapper";
 
-import TeamOverview from '@/content/Dashboards/Tasks/TeamOverview';
-import TasksAnalytics from '@/content/Dashboards/Tasks/TasksAnalytics';
-import Performance from '@/content/Dashboards/Tasks/Performance';
-import Projects from '@/content/Dashboards/Tasks/Projects';
-import Checklist from '@/content/Dashboards/Tasks/Checklist';
-import Profile from '@/content/Dashboards/Tasks/Profile';
-import TaskSearch from '@/content/Dashboards/Tasks/TaskSearch';
+import TeamOverview from "@/content/Dashboards/Tasks/TeamOverview";
+import TasksAnalytics from "@/content/Dashboards/Tasks/TasksAnalytics";
+import Performance from "@/content/Dashboards/Tasks/Performance";
+import Projects from "@/content/Dashboards/Tasks/Projects";
+import Checklist from "@/content/Dashboards/Tasks/Checklist";
+import Profile from "@/content/Dashboards/Tasks/Profile";
+import TaskSearch from "@/content/Dashboards/Tasks/TaskSearch";
 
 const TabsContainerWrapper = styled(Box)(
   ({ theme }) => `
@@ -109,11 +109,11 @@ const TabsContainerWrapper = styled(Box)(
 function DashboardTasks() {
   const theme = useTheme();
 
-  const [currentTab, setCurrentTab] = useState<string>('analytics');
+  const [currentTab, setCurrentTab] = useState<string>("analytics");
 
   const tabs = [
-    { value: 'analytics', label: 'Analytics Overview' },
-    { value: 'taskSearch', label: 'Task Search' }
+    { value: "analytics", label: "Analytics Overview" },
+    { value: "taskSearch", label: "Task Search" },
   ];
 
   const handleTabsChange = (_event: ChangeEvent<{}>, value: string): void => {
@@ -151,7 +151,7 @@ function DashboardTasks() {
             alignItems="stretch"
             spacing={0}
           >
-            {currentTab === 'analytics' && (
+            {currentTab === "analytics" && (
               <>
                 <Grid item xs={12}>
                   <Box p={4}>
@@ -159,11 +159,11 @@ function DashboardTasks() {
                   </Box>
                 </Grid>
                 <Grid item xs={12}>
-                  <Divider />
+                  {/* <Divider /> */}
                   <Box
                     p={4}
                     sx={{
-                      background: `${theme.colors.alpha.black[5]}`
+                      background: `${theme.colors.alpha.black[5]}`,
                     }}
                   >
                     <Grid container spacing={4}>
@@ -175,18 +175,18 @@ function DashboardTasks() {
                       </Grid>
                     </Grid>
                   </Box>
-                  <Divider />
+                  {/* <Divider /> */}
                 </Grid>
                 <Grid item xs={12}>
                   <Box p={4}>
                     <Projects />
                   </Box>
-                  <Divider />
+                  {/* <Divider /> */}
                 </Grid>
                 <Grid item xs={12}>
                   <Box
                     sx={{
-                      background: `${theme.colors.alpha.black[5]}`
+                      background: `${theme.colors.alpha.black[5]}`,
                     }}
                   >
                     <Grid container spacing={0}>
@@ -194,7 +194,7 @@ function DashboardTasks() {
                         <Box
                           p={4}
                           sx={{
-                            background: `${theme.colors.alpha.white[70]}`
+                            background: `${theme.colors.alpha.white[70]}`,
                           }}
                         >
                           <Checklist />
@@ -210,7 +210,7 @@ function DashboardTasks() {
                 </Grid>
               </>
             )}
-            {currentTab === 'taskSearch' && (
+            {currentTab === "taskSearch" && (
               <Grid item xs={12}>
                 <Box p={4}>
                   <TaskSearch />

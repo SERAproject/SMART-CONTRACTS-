@@ -1,27 +1,27 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 
-import NextLink from 'next/link';
+import NextLink from "next/link";
 
 import {
   Avatar,
   Box,
   Button,
-  Divider,
+  // Divider,
   Hidden,
   lighten,
   List,
   ListItem,
   ListItemText,
   Popover,
-  Typography
-} from '@mui/material';
+  Typography,
+} from "@mui/material";
 
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
-import { styled } from '@mui/material/styles';
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
-import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import InboxTwoToneIcon from "@mui/icons-material/InboxTwoTone";
+import { styled } from "@mui/material/styles";
+import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
+import AccountBoxTwoToneIcon from "@mui/icons-material/AccountBoxTwoTone";
+import LockOpenTwoToneIcon from "@mui/icons-material/LockOpenTwoTone";
+import AccountTreeTwoToneIcon from "@mui/icons-material/AccountTreeTwoTone";
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -60,9 +60,9 @@ const UserBoxDescription = styled(Typography)(
 
 function HeaderUserbox() {
   const user = {
-    name: 'Rory Porter',
-    avatar: '/static/images/avatars/avatar.jpg',
-    jobtitle: '0x3dC ... EDdc'
+    name: "Rory Porter",
+    avatar: "/static/images/avatars/avatar.jpg",
+    jobtitle: "0x3dC ... EDdc",
   };
 
   const ref = useRef<any>(null);
@@ -97,12 +97,12 @@ function HeaderUserbox() {
         onClose={handleClose}
         open={isOpen}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
+          vertical: "top",
+          horizontal: "right",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
+          vertical: "top",
+          horizontal: "right",
         }}
       >
         <MenuUserBox sx={{ minWidth: 210 }} display="flex">
@@ -114,7 +114,7 @@ function HeaderUserbox() {
             </UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>
-        <Divider sx={{ mb: 0 }} />
+        {/* <Divider sx={{ mb: 0 }} /> */}
         <List sx={{ p: 1 }} component="nav">
           <NextLink href="/management/profile" passHref>
             <ListItem button>
@@ -135,7 +135,7 @@ function HeaderUserbox() {
             </ListItem>
           </NextLink>
         </List>
-        <Divider />
+        {/* <Divider /> */}
         <Box sx={{ m: 1 }}>
           <Button color="primary" fullWidth>
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />

@@ -2,20 +2,20 @@ import {
   Box,
   Typography,
   Container,
-  Divider,
+  // Divider,
   IconButton,
   Tooltip,
-  styled
-} from '@mui/material';
-import type { ReactElement } from 'react';
-import BaseLayout from '@/layouts/BaseLayout';
+  styled,
+} from "@mui/material";
+import type { ReactElement } from "react";
+import BaseLayout from "@/layouts/BaseLayout";
 
-import Head from 'next/head';
-import Logo from '@/components/LogoSign';
+import Head from "next/head";
+import Logo from "@/components/LogoSign";
 
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 const MainContent = styled(Box)(
   () => `
@@ -67,7 +67,7 @@ function StatusMaintenance() {
                 src="/static/images/status/maintenance.svg"
               />
             </Box>
-            <Divider sx={{ my: 4 }} />
+            {/* <Divider sx={{ my: 4 }} /> */}
             <Box
               display="flex"
               alignItems="center"
@@ -75,7 +75,7 @@ function StatusMaintenance() {
             >
               <Box>
                 <Typography component="span" variant="subtitle1">
-                  Phone:{' '}
+                  Phone:{" "}
                 </Typography>
                 <Typography
                   component="span"

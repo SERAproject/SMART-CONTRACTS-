@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, useContext } from 'react';
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 import {
   Box,
   Card,
@@ -12,45 +12,45 @@ import {
   TableContainer,
   Typography,
   Tooltip,
-  Divider
-} from '@mui/material';
-import Label from '@/components/Label';
-import { Invoice, InvoiceStatus } from '@/models/applications/invoices';
-import { SeraContext } from '@/contexts/SeraContext';
+  // Divider,
+} from "@mui/material";
+import Label from "@/components/Label";
+import { Invoice, InvoiceStatus } from "@/models/applications/invoices";
+import { SeraContext } from "@/contexts/SeraContext";
 
 const invoicesData: Invoice[] = [
   {
-    id: '1',
-    bus_parter: 'Trade',
+    id: "1",
+    bus_parter: "Trade",
     delivery_term: null,
-    payment_term: '12341231',
-    due_date: '2023/1/15',
-    status: 'pending'
+    payment_term: "12341231",
+    due_date: "2023/1/15",
+    status: "pending",
   },
   {
-    id: '2',
-    bus_parter: 'Trade',
+    id: "2",
+    bus_parter: "Trade",
     delivery_term: null,
-    payment_term: '12341231',
-    due_date: '2023/1/15',
-    status: 'pending'
-  }
+    payment_term: "12341231",
+    due_date: "2023/1/15",
+    status: "pending",
+  },
 ];
 
 const getStatusLabel = (invoiceStatus: InvoiceStatus): JSX.Element => {
   const map = {
     failed: {
-      text: 'Failed',
-      color: 'error'
+      text: "Failed",
+      color: "error",
     },
     completed: {
-      text: 'Completed',
-      color: 'success'
+      text: "Completed",
+      color: "success",
     },
     pending: {
-      text: 'Pending',
-      color: 'warning'
-    }
+      text: "Pending",
+      color: "warning",
+    },
   };
 
   const { text, color }: any = map[invoiceStatus];
@@ -69,7 +69,7 @@ const applyPagination = (
 const InvoicesTable = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
-  const [searchText, setSearchText] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>("");
   const { invoices, SetInvoices } = useContext(SeraContext);
   const [filteredPartner, setFilteredPartner] = useState<Invoice[]>([]);
 
@@ -104,7 +104,7 @@ const InvoicesTable = () => {
       <Box
         component="form"
         sx={{
-          '& > :not(style)': { m: 1, width: '30%', float: 'right' }
+          "& > :not(style)": { m: 1, width: "30%", float: "right" },
         }}
         noValidate
         autoComplete="off"
@@ -116,7 +116,7 @@ const InvoicesTable = () => {
           onChange={handleSearch}
         />
       </Box>
-      <Divider />
+      {/* <Divider /> */}
       <TableContainer>
         <Table>
           <TableHead>
@@ -155,7 +155,7 @@ const InvoicesTable = () => {
                       {invoices.bus_parter}
                     </Typography>
                     <Tooltip
-                      title={'0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'}
+                      title={"0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc"}
                       placement="top-start"
                     >
                       <Typography variant="body2" color="text.secondary" noWrap>

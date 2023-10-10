@@ -1,25 +1,25 @@
-import React, { ChangeEvent, useContext, useState } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Divider from '@mui/material/Divider/Divider';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Typography from '@mui/material/Typography';
-import { SeraContext } from '@/contexts/SeraContext';
+import React, { ChangeEvent, useContext, useState } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+// import Divider from "@mui/material/Divider/Divider";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Typography from "@mui/material/Typography";
+import { SeraContext } from "@/contexts/SeraContext";
 
 const AddPartnerDialog = () => {
   const { openFlag, busPartners, handleCloseFlag } = useContext(SeraContext);
-  const [wallet_address, setWalletAddress] = useState<string>('');
+  const [wallet_address, setWalletAddress] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -53,12 +53,12 @@ const AddPartnerDialog = () => {
             value={wallet_address}
             onChange={handleWalletAddressChange}
           />
-          <Divider style={{ marginTop: '12px', marginBottom: '24px' }} />
+          {/* <Divider style={{ marginTop: '12px', marginBottom: '24px' }} /> */}
           {busPartners.filter((item) => item.w_address.includes(wallet_address))
             .length ? (
             <>
               <Grid container spacing={2}>
-                <Grid item md={6} textAlign={'right'}>
+                <Grid item md={6} textAlign={"right"}>
                   <div>Wallet Address:</div>
                 </Grid>
                 <Grid item md={6}>
@@ -68,7 +68,7 @@ const AddPartnerDialog = () => {
                         item.w_address.includes(wallet_address)
                       )[0]
                       .w_address.substring(0, 5) +
-                      ' ... ' +
+                      " ... " +
                       busPartners
                         .filter((item) =>
                           item.w_address.includes(wallet_address)
@@ -78,7 +78,7 @@ const AddPartnerDialog = () => {
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
-                <Grid item md={6} textAlign={'right'}>
+                <Grid item md={6} textAlign={"right"}>
                   <div>Trade Name:</div>
                 </Grid>
                 <Grid item md={6}>
@@ -92,7 +92,7 @@ const AddPartnerDialog = () => {
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
-                <Grid item md={6} textAlign={'right'}>
+                <Grid item md={6} textAlign={"right"}>
                   <div>Legal Name:</div>
                 </Grid>
                 <Grid item md={6}>
@@ -107,7 +107,7 @@ const AddPartnerDialog = () => {
               </Grid>
 
               <Grid container spacing={2}>
-                <Grid item md={6} textAlign={'right'}>
+                <Grid item md={6} textAlign={"right"}>
                   <div>Country:</div>
                 </Grid>
                 <Grid item md={6}>
@@ -121,7 +121,7 @@ const AddPartnerDialog = () => {
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
-                <Grid item md={6} textAlign={'right'}>
+                <Grid item md={6} textAlign={"right"}>
                   <div>State/town:</div>
                 </Grid>
                 <Grid item md={6}>
@@ -135,7 +135,7 @@ const AddPartnerDialog = () => {
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
-                <Grid item md={6} textAlign={'right'}>
+                <Grid item md={6} textAlign={"right"}>
                   <div>Building Number:</div>
                 </Grid>
                 <Grid item md={6}>
@@ -149,7 +149,7 @@ const AddPartnerDialog = () => {
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
-                <Grid item md={6} textAlign={'right'}>
+                <Grid item md={6} textAlign={"right"}>
                   <div>Email:</div>
                 </Grid>
                 <Grid item md={6}>
@@ -163,7 +163,7 @@ const AddPartnerDialog = () => {
                 </Grid>
               </Grid>
               <Grid container spacing={2}>
-                <Grid item md={6} textAlign={'right'}>
+                <Grid item md={6} textAlign={"right"}>
                   <div>Phone Number:</div>
                 </Grid>
                 <Grid item md={6}>
@@ -184,22 +184,22 @@ const AddPartnerDialog = () => {
                 label="Business Partner Email"
                 variant="standard"
                 fullWidth={true}
-                style={{ marginBottom: '10px' }}
+                style={{ marginBottom: "10px" }}
               />
               <TextField
                 error={false}
                 label="Your Email"
                 variant="standard"
                 fullWidth={true}
-                style={{ marginBottom: '10px' }}
+                style={{ marginBottom: "10px" }}
               />
-              <FormControl sx={{ width: '100%' }} variant="standard">
+              <FormControl sx={{ width: "100%" }} variant="standard">
                 <InputLabel htmlFor="standard-adornment-password">
                   Password
                 </InputLabel>
                 <Input
                   id="standard-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton

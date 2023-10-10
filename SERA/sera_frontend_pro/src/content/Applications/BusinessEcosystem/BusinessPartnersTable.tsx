@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, useContext } from 'react';
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 import {
   Box,
   Card,
@@ -13,36 +13,36 @@ import {
   Typography,
   Rating,
   Tooltip,
-  Divider
-} from '@mui/material';
-import { BusinessPartner } from '@/models/applications/business_partner';
-import { SeraContext } from '@/contexts/SeraContext';
+  // Divider,
+} from "@mui/material";
+import { BusinessPartner } from "@/models/applications/business_partner";
+import { SeraContext } from "@/contexts/SeraContext";
 
 const busPartner: BusinessPartner[] = [
   {
-    id: '1',
-    t_name: 'Trade 3DC',
-    l_name: 'Legal 3DC',
-    country: 'Canada',
-    state_town: 'Toronto',
-    b_number: 'BDS332',
-    email: 'testman3dc@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc',
-    reputation: 2
+    id: "1",
+    t_name: "Trade 3DC",
+    l_name: "Legal 3DC",
+    country: "Canada",
+    state_town: "Toronto",
+    b_number: "BDS332",
+    email: "testman3dc@gmail.com",
+    phone: "(+1) 392 493 2933",
+    w_address: "0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc",
+    reputation: 2,
   },
   {
-    id: '2',
-    t_name: 'Trade 166',
-    l_name: 'Legal 166',
-    country: 'Canada',
-    state_town: 'Toronto',
-    b_number: 'TR 166',
-    email: 'testman166@gmail.com',
-    phone: '(+1) 392 493 2933',
-    w_address: '0x1663CE5485ef8c7b8C390F1132e716d84fC357E8',
-    reputation: 2
-  }
+    id: "2",
+    t_name: "Trade 166",
+    l_name: "Legal 166",
+    country: "Canada",
+    state_town: "Toronto",
+    b_number: "TR 166",
+    email: "testman166@gmail.com",
+    phone: "(+1) 392 493 2933",
+    w_address: "0x1663CE5485ef8c7b8C390F1132e716d84fC357E8",
+    reputation: 2,
+  },
 ];
 
 const applyPagination = (
@@ -56,7 +56,7 @@ const applyPagination = (
 const BusinessPartnersTable = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
-  const [searchText, setSearchText] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>("");
   const { busPartners, SetBusPartners } = useContext(SeraContext);
   const [filteredPartner, setFilteredPartner] = useState<BusinessPartner[]>([]);
 
@@ -91,7 +91,7 @@ const BusinessPartnersTable = () => {
       <Box
         component="form"
         sx={{
-          '& > :not(style)': { m: 1, width: '30%', float: 'right' }
+          "& > :not(style)": { m: 1, width: "30%", float: "right" },
         }}
         noValidate
         autoComplete="off"
@@ -103,7 +103,7 @@ const BusinessPartnersTable = () => {
           onChange={handleSearch}
         />
       </Box>
-      <Divider />
+      {/* <Divider /> */}
       <TableContainer>
         <Table>
           <TableHead>
@@ -210,7 +210,7 @@ const BusinessPartnersTable = () => {
                         noWrap
                       >
                         {busPartner.w_address.substring(0, 5) +
-                          ' ... ' +
+                          " ... " +
                           busPartner.w_address.substring(38)}
                       </Typography>
                     </Tooltip>

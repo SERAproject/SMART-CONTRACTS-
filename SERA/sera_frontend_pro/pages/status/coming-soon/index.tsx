@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
   Container,
-  Divider,
+  // Divider,
   OutlinedInput,
   IconButton,
   Tooltip,
@@ -11,18 +11,18 @@ import {
   InputAdornment,
   Button,
   styled,
-  FormHelperText
-} from '@mui/material';
-import type { ReactElement } from 'react';
-import BaseLayout from '@/layouts/BaseLayout';
+  FormHelperText,
+} from "@mui/material";
+import type { ReactElement } from "react";
+import BaseLayout from "@/layouts/BaseLayout";
 
-import Head from 'next/head';
-import Logo from '@/components/LogoSign';
+import Head from "next/head";
+import Logo from "@/components/LogoSign";
 
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import MailTwoToneIcon from '@mui/icons-material/MailTwoTone';
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import MailTwoToneIcon from "@mui/icons-material/MailTwoTone";
 
 const MainContent = styled(Box)(
   () => `
@@ -78,7 +78,7 @@ function StatusComingSoon() {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
+        seconds: Math.floor((difference / 1000) % 60),
       };
     }
 
@@ -144,7 +144,7 @@ function StatusComingSoon() {
             </Box>
 
             <Container maxWidth="sm">
-              <Box sx={{ textAlign: 'center', p: 4 }}>
+              <Box sx={{ textAlign: "center", p: 4 }}>
                 <FormControl variant="outlined" fullWidth>
                   <OutlinedInputWrapper
                     type="text"
@@ -166,8 +166,8 @@ function StatusComingSoon() {
                     We'll email you once our website is launched!
                   </FormHelperText>
                 </FormControl>
-                <Divider sx={{ my: 4 }} />
-                <Box sx={{ textAlign: 'center' }}>
+                {/* <Divider sx={{ my: 4 }} /> */}
+                <Box sx={{ textAlign: "center" }}>
                   <Tooltip arrow placement="top" title="Facebook">
                     <IconButton color="primary">
                       <FacebookIcon />

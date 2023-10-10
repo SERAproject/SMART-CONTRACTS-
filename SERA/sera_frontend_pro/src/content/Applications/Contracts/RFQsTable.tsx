@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, useContext } from 'react';
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 import {
   Box,
   Card,
@@ -12,24 +12,24 @@ import {
   TableContainer,
   Typography,
   Tooltip,
-  Divider
-} from '@mui/material';
-import { RFQ } from '@/models/applications/contracts';
-import { SeraContext } from '@/contexts/SeraContext';
+  // Divider,
+} from "@mui/material";
+import { RFQ } from "@/models/applications/contracts";
+import { SeraContext } from "@/contexts/SeraContext";
 
 const rfq: RFQ[] = [
   {
-    id: '1',
-    buyer: 'Trade 3DC',
+    id: "1",
+    buyer: "Trade 3DC",
     material: null,
-    w_address: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'
+    w_address: "0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc",
   },
   {
-    id: '2',
-    buyer: 'Trade 3DC',
+    id: "2",
+    buyer: "Trade 3DC",
     material: null,
-    w_address: '0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'
-  }
+    w_address: "0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc",
+  },
 ];
 
 const applyPagination = (rfqs: RFQ[], page: number, limit: number): RFQ[] => {
@@ -39,7 +39,7 @@ const applyPagination = (rfqs: RFQ[], page: number, limit: number): RFQ[] => {
 const RFQsTable = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
-  const [searchText, setSearchText] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>("");
   const { rfqs, SetRFQs } = useContext(SeraContext);
   const [filteredPartner, setFilteredRFQ] = useState<RFQ[]>([]);
 
@@ -70,7 +70,7 @@ const RFQsTable = () => {
       <Box
         component="form"
         sx={{
-          '& > :not(style)': { m: 1, width: '30%', float: 'right' }
+          "& > :not(style)": { m: 1, width: "30%", float: "right" },
         }}
         noValidate
         autoComplete="off"
@@ -82,7 +82,7 @@ const RFQsTable = () => {
           onChange={handleSearch}
         />
       </Box>
-      <Divider />
+      {/* <Divider /> */}
       <TableContainer>
         <Table>
           <TableHead>
@@ -119,7 +119,7 @@ const RFQsTable = () => {
                       {rfq.buyer}
                     </Typography>
                     <Tooltip
-                      title={'0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'}
+                      title={"0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc"}
                       placement="top-start"
                     >
                       <Typography variant="body2" color="text.secondary" noWrap>
@@ -148,7 +148,7 @@ const RFQsTable = () => {
                         noWrap
                       >
                         {rfq.w_address.substring(0, 5) +
-                          ' ... ' +
+                          " ... " +
                           rfq.w_address.substring(38)}
                       </Typography>
                     </Tooltip>
