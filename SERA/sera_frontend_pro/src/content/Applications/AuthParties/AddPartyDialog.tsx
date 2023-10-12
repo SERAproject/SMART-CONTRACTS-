@@ -1,29 +1,29 @@
-import React, { useContext, useState, useEffect } from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Divider from '@mui/material/Divider/Divider';
-import Grid from '@mui/material/Grid';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Typography from '@mui/material/Typography';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import React, { useContext, useState, useEffect } from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+// import Divider from "@mui/material/Divider/Divider";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Typography from "@mui/material/Typography";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-import { SeraContext } from '@/contexts/SeraContext';
+import { SeraContext } from "@/contexts/SeraContext";
 
 const AddPartyDialog = () => {
   const { openFlag, authParties, handleCloseFlag } = useContext(SeraContext);
-  const [wallet_address, setWalletAddress] = useState<string>('');
+  const [wallet_address, setWalletAddress] = useState<string>("");
   const detailColumns = [
-    'Wallet Address:',
-    'Trade Name:',
-    'Country:',
-    'State/town:',
-    'Email:',
-    'Phone Number:'
+    "Wallet Address:",
+    "Trade Name:",
+    "Country:",
+    "State/town:",
+    "Email:",
+    "Phone Number:",
   ];
   const showDetail = () => {
     if (authParties.length) {
@@ -39,7 +39,7 @@ const AddPartyDialog = () => {
   };
 
   useEffect(() => {
-    setWalletAddress('');
+    setWalletAddress("");
   }, []);
 
   return (
@@ -58,24 +58,24 @@ const AddPartyDialog = () => {
                 onChange={handleWalletAddressChange}
                 label="Wallet Address"
               >
-                <MenuItem value={'0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'}>
+                <MenuItem value={"0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc"}>
                   0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc
                 </MenuItem>
-                <MenuItem value={'0x3dc4696671ca3cb6c34674a0c1729bbfcc29edd1'}>
+                <MenuItem value={"0x3dc4696671ca3cb6c34674a0c1729bbfcc29edd1"}>
                   0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDd1
                 </MenuItem>
               </Select>
             </FormControl>
           </Grid>
-          <Divider style={{ marginTop: '12px', marginBottom: '24px' }} />
+          {/* <Divider style={{ marginTop: '12px', marginBottom: '24px' }} /> */}
           {detailColumns.map((item, index) => {
             let data = showDetail();
-            let value = '';
+            let value = "";
             switch (index) {
               case 0:
                 value =
                   data?.w_address.substring(0, 5) +
-                  ' ... ' +
+                  " ... " +
                   data?.w_address.substring(38);
                 break;
               case 1:
@@ -96,7 +96,7 @@ const AddPartyDialog = () => {
             }
             return (
               <Grid container spacing={2} key={index}>
-                <Grid item md={6} textAlign={'right'}>
+                <Grid item md={6} textAlign={"right"}>
                   <div>{item}</div>
                 </Grid>
                 <Grid item md={6}>

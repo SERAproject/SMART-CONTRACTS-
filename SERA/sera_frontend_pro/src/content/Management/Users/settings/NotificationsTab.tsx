@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from "react";
 import {
   Box,
   Typography,
@@ -7,22 +7,22 @@ import {
   ListItem,
   List,
   ListItemText,
-  Divider,
-  Switch
-} from '@mui/material';
+  // Divider,
+  Switch,
+} from "@mui/material";
 
 function NotificationsTab() {
   const [state, setState] = useState({
     checkedA: true,
     checkedB: false,
     checkedC: true,
-    checkedD: false
+    checkedD: false,
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
-      [event.target.name]: event.target.checked
+      [event.target.name]: event.target.checked,
     });
   };
 
@@ -39,10 +39,10 @@ function NotificationsTab() {
           <List>
             <ListItem sx={{ p: 3 }}>
               <ListItemText
-                primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}
+                primaryTypographyProps={{ variant: "h5", gutterBottom: true }}
                 secondaryTypographyProps={{
-                  variant: 'subtitle2',
-                  lineHeight: 1
+                  variant: "subtitle2",
+                  lineHeight: 1,
                 }}
                 primary="Widthdraw Activity"
                 secondary="Receive an email when a widthdrawal is made"
@@ -54,13 +54,13 @@ function NotificationsTab() {
                 name="checkedA"
               />
             </ListItem>
-            <Divider component="li" />
+            {/* <Divider component="li" /> */}
             <ListItem sx={{ p: 3 }}>
               <ListItemText
-                primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}
+                primaryTypographyProps={{ variant: "h5", gutterBottom: true }}
                 secondaryTypographyProps={{
-                  variant: 'subtitle2',
-                  lineHeight: 1
+                  variant: "subtitle2",
+                  lineHeight: 1,
                 }}
                 primary="Weekly Report"
                 secondary="Receive account status weekly report in your inbox"
@@ -86,10 +86,10 @@ function NotificationsTab() {
           <List>
             <ListItem sx={{ p: 3 }}>
               <ListItemText
-                primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}
+                primaryTypographyProps={{ variant: "h5", gutterBottom: true }}
                 secondaryTypographyProps={{
-                  variant: 'subtitle2',
-                  lineHeight: 1
+                  variant: "subtitle2",
+                  lineHeight: 1,
                 }}
                 primary="Failed Payment"
                 secondary="Get a message when a payment fails"
@@ -101,13 +101,13 @@ function NotificationsTab() {
                 name="checkedC"
               />
             </ListItem>
-            <Divider component="li" />
+            {/* <Divider component="li" /> */}
             <ListItem sx={{ p: 3 }}>
               <ListItemText
-                primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}
+                primaryTypographyProps={{ variant: "h5", gutterBottom: true }}
                 secondaryTypographyProps={{
-                  variant: 'subtitle2',
-                  lineHeight: 1
+                  variant: "subtitle2",
+                  lineHeight: 1,
                 }}
                 primary="Order Status Update"
                 secondary="Whenever an order is updated, get a notification on your phone"

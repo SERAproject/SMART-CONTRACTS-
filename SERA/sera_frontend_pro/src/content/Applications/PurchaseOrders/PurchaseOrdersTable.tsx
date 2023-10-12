@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, useContext } from 'react';
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 import {
   Box,
   Card,
@@ -12,50 +12,50 @@ import {
   TableContainer,
   Typography,
   Tooltip,
-  Divider
-} from '@mui/material';
-import Label from '@/components/Label';
+  // Divider,
+} from "@mui/material";
+import Label from "@/components/Label";
 import {
   PurhcaseOrder,
-  PurchaseOrderStatus
-} from '@/models/applications/purhcase_orders';
-import { SeraContext } from '@/contexts/SeraContext';
+  PurchaseOrderStatus,
+} from "@/models/applications/purhcase_orders";
+import { SeraContext } from "@/contexts/SeraContext";
 
 const purOrderData: PurhcaseOrder[] = [
   {
-    pr_id: '1',
-    c_id: '2',
-    buyer: 'Trade 3DC',
-    supplier: 'Trade 166',
+    pr_id: "1",
+    c_id: "2",
+    buyer: "Trade 3DC",
+    supplier: "Trade 166",
     delivery_term: null,
-    payment_term: '12323',
-    status: 'pending'
+    payment_term: "12323",
+    status: "pending",
   },
   {
-    pr_id: '2',
-    c_id: '3',
-    buyer: 'Trade 3DC',
-    supplier: 'Trade 166',
+    pr_id: "2",
+    c_id: "3",
+    buyer: "Trade 3DC",
+    supplier: "Trade 166",
     delivery_term: null,
-    payment_term: '12323',
-    status: 'completed'
-  }
+    payment_term: "12323",
+    status: "completed",
+  },
 ];
 
 const getStatusLabel = (purOrderStatus: PurchaseOrderStatus): JSX.Element => {
   const map = {
     failed: {
-      text: 'Failed',
-      color: 'error'
+      text: "Failed",
+      color: "error",
     },
     completed: {
-      text: 'Completed',
-      color: 'success'
+      text: "Completed",
+      color: "success",
     },
     pending: {
-      text: 'Pending',
-      color: 'warning'
-    }
+      text: "Pending",
+      color: "warning",
+    },
   };
 
   const { text, color }: any = map[purOrderStatus];
@@ -74,7 +74,7 @@ const applyPagination = (
 const PurhcaseOrdersTable = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
-  const [searchText, setSearchText] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>("");
   const { purchaseOrders, SetPurchaseOrders } = useContext(SeraContext);
   const [filteredPartner, setFilteredPartner] = useState<PurhcaseOrder[]>([]);
 
@@ -109,7 +109,7 @@ const PurhcaseOrdersTable = () => {
       <Box
         component="form"
         sx={{
-          '& > :not(style)': { m: 1, width: '30%', float: 'right' }
+          "& > :not(style)": { m: 1, width: "30%", float: "right" },
         }}
         noValidate
         autoComplete="off"
@@ -121,7 +121,7 @@ const PurhcaseOrdersTable = () => {
           onChange={handleSearch}
         />
       </Box>
-      <Divider />
+      {/* <Divider /> */}
       <TableContainer>
         <Table>
           <TableHead>
@@ -172,7 +172,7 @@ const PurhcaseOrdersTable = () => {
                       {purOrder.buyer}
                     </Typography>
                     <Tooltip
-                      title={'0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc'}
+                      title={"0x3dC4696671ca3cb6C34674A0c1729bbFcC29EDdc"}
                       placement="top-start"
                     >
                       <Typography variant="body2" color="text.secondary" noWrap>
@@ -191,7 +191,7 @@ const PurhcaseOrdersTable = () => {
                       {purOrder.supplier}
                     </Typography>
                     <Tooltip
-                      title={'0x1663CE5485ef8c7b8C390F1132e716d84fC357E8'}
+                      title={"0x1663CE5485ef8c7b8C390F1132e716d84fC357E8"}
                       placement="top-start"
                     >
                       <Typography variant="body2" color="text.secondary" noWrap>

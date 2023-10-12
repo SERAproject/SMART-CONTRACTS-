@@ -3,15 +3,15 @@ import {
   Typography,
   Card,
   CardHeader,
-  Divider,
+  // Divider,
   Avatar,
   useTheme,
-  styled
-} from '@mui/material';
+  styled,
+} from "@mui/material";
 
-import ShoppingBagTwoToneIcon from '@mui/icons-material/ShoppingBagTwoTone';
-import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
-import StarTwoToneIcon from '@mui/icons-material/StarTwoTone';
+import ShoppingBagTwoToneIcon from "@mui/icons-material/ShoppingBagTwoTone";
+import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
+import StarTwoToneIcon from "@mui/icons-material/StarTwoTone";
 
 const AvatarPrimary = styled(Avatar)(
   ({ theme }) => `
@@ -28,7 +28,7 @@ function RecentActivity() {
   return (
     <Card>
       <CardHeader title="Recent Activity" />
-      <Divider />
+      {/* <Divider /> */}
       <Box px={2} py={4} display="flex" alignItems="flex-start">
         <AvatarPrimary>
           <ShoppingBagTwoToneIcon />
@@ -60,7 +60,7 @@ function RecentActivity() {
           </Box>
         </Box>
       </Box>
-      <Divider />
+      {/* <Divider /> */}
       <Box px={2} py={4} display="flex" alignItems="flex-start">
         <AvatarPrimary>
           <FavoriteTwoToneIcon />
@@ -92,7 +92,7 @@ function RecentActivity() {
           </Box>
         </Box>
       </Box>
-      <Divider />
+      {/* <Divider /> */}
       <Box px={2} py={4} display="flex" alignItems="flex-start">
         <AvatarPrimary>
           <StarTwoToneIcon />

@@ -3,17 +3,17 @@ import {
   Tooltip,
   Rating,
   IconButton,
-  Divider,
+  // Divider,
   Box,
   ListItem,
   ListItemText,
   List,
   Avatar,
-  useTheme
-} from '@mui/material';
-import PhoneTwoToneIcon from '@mui/icons-material/PhoneTwoTone';
-import EmailTwoToneIcon from '@mui/icons-material/EmailTwoTone';
-import MessageTwoToneIcon from '@mui/icons-material/MessageTwoTone';
+  useTheme,
+} from "@mui/material";
+import PhoneTwoToneIcon from "@mui/icons-material/PhoneTwoTone";
+import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
+import MessageTwoToneIcon from "@mui/icons-material/MessageTwoTone";
 
 function Profile() {
   const theme = useTheme();
@@ -22,10 +22,10 @@ function Profile() {
     <Box>
       <Avatar
         sx={{
-          mx: 'auto',
+          mx: "auto",
           mb: 1.5,
           width: theme.spacing(12),
-          height: theme.spacing(12)
+          height: theme.spacing(12),
         }}
         variant="rounded"
         alt="Craig Donin"
@@ -43,7 +43,7 @@ function Profile() {
         <Typography
           variant="h5"
           sx={{
-            pl: 0.5
+            pl: 0.5,
           }}
         >
           4.1
@@ -55,7 +55,7 @@ function Profile() {
           <IconButton
             color="primary"
             sx={{
-              mx: 0.5
+              mx: 0.5,
             }}
           >
             <PhoneTwoToneIcon />
@@ -65,7 +65,7 @@ function Profile() {
           <IconButton
             color="primary"
             sx={{
-              mx: 0.5
+              mx: 0.5,
             }}
           >
             <EmailTwoToneIcon />
@@ -75,7 +75,7 @@ function Profile() {
           <IconButton
             color="primary"
             sx={{
-              mx: 0.5
+              mx: 0.5,
             }}
           >
             <MessageTwoToneIcon />
@@ -84,46 +84,46 @@ function Profile() {
       </Box>
       <List
         sx={{
-          px: 2
+          px: 2,
         }}
       >
-        <Divider component="li" />
+        {/* <Divider component="li" /> */}
         <ListItem
           sx={{
-            py: 1.5
+            py: 1.5,
           }}
         >
           <ListItemText
             primary="Join Date"
-            primaryTypographyProps={{ variant: 'subtitle2' }}
+            primaryTypographyProps={{ variant: "subtitle2" }}
           />
           <Typography variant="subtitle2" color="text.primary">
             22 January 2021
           </Typography>
         </ListItem>
-        <Divider component="li" />
+        {/* <Divider component="li" /> */}
         <ListItem
           sx={{
-            py: 1.5
+            py: 1.5,
           }}
         >
           <ListItemText
             primary="Company"
-            primaryTypographyProps={{ variant: 'subtitle2' }}
+            primaryTypographyProps={{ variant: "subtitle2" }}
           />
           <Typography variant="subtitle2" color="text.primary">
             Google Inc.
           </Typography>
         </ListItem>
-        <Divider component="li" />
+        {/* <Divider component="li" /> */}
         <ListItem
           sx={{
-            py: 1.5
+            py: 1.5,
           }}
         >
           <ListItemText
             primary="Tasks"
-            primaryTypographyProps={{ variant: 'subtitle2' }}
+            primaryTypographyProps={{ variant: "subtitle2" }}
           />
           <Typography
             variant="subtitle2"

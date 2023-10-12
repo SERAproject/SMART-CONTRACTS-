@@ -3,58 +3,58 @@ import {
   Typography,
   Card,
   CardHeader,
-  Divider,
+  // Divider,
   Avatar,
   Grid,
-  Button
-} from '@mui/material';
+  Button,
+} from "@mui/material";
 
-import CreateIcon from '@mui/icons-material/Create';
+import CreateIcon from "@mui/icons-material/Create";
 
 function Feed() {
   const feed = [
     {
-      name: 'Munroe Dacks',
-      jobtitle: 'Senior Accountant',
-      company: 'Trudoo',
-      avatar: '/static/images/avatars/avatar.jpg'
+      name: "Munroe Dacks",
+      jobtitle: "Senior Accountant",
+      company: "Trudoo",
+      avatar: "/static/images/avatars/avatar.jpg",
     },
     {
-      name: 'Gunilla Canario',
-      jobtitle: 'Associate Professor',
-      company: 'Buzzdog',
-      avatar: '/static/images/avatars/avatar.jpg'
+      name: "Gunilla Canario",
+      jobtitle: "Associate Professor",
+      company: "Buzzdog",
+      avatar: "/static/images/avatars/avatar.jpg",
     },
     {
-      name: 'Rowena Geistmann',
-      jobtitle: 'Pharmacist',
-      company: 'Yozio',
-      avatar: '/static/images/avatars/avatar.jpg'
+      name: "Rowena Geistmann",
+      jobtitle: "Pharmacist",
+      company: "Yozio",
+      avatar: "/static/images/avatars/avatar.jpg",
     },
     {
-      name: 'Ede Stoving',
-      jobtitle: 'VP Operations',
-      company: 'Cogibox',
-      avatar: '/static/images/avatars/avatar.jpg'
+      name: "Ede Stoving",
+      jobtitle: "VP Operations",
+      company: "Cogibox",
+      avatar: "/static/images/avatars/avatar.jpg",
     },
     {
-      name: 'Crissy Spere',
-      jobtitle: 'Social Worker',
-      company: 'Babbleblab',
-      avatar: '/static/images/avatars/avatar.jpg'
+      name: "Crissy Spere",
+      jobtitle: "Social Worker",
+      company: "Babbleblab",
+      avatar: "/static/images/avatars/avatar.jpg",
     },
     {
-      name: 'Michel Greatbanks',
-      jobtitle: 'Research Assistant III',
-      company: 'Aimbu',
-      avatar: '/static/images/avatars/6.jpg'
-    }
+      name: "Michel Greatbanks",
+      jobtitle: "Research Assistant III",
+      company: "Aimbu",
+      avatar: "/static/images/avatars/6.jpg",
+    },
   ];
 
   return (
     <Card>
       <CardHeader title="Followers Feed" />
-      <Divider />
+      {/* <Divider /> */}
       <Box p={2}>
         <Grid container spacing={0}>
           {feed.map((_feed) => (

@@ -4,16 +4,16 @@ import {
   Typography,
   Card,
   CardHeader,
-  Divider,
-  Grid
-} from '@mui/material';
+  // Divider,
+  Grid,
+} from "@mui/material";
 
-import { ArrowForwardTwoTone } from '@mui/icons-material';
+import { ArrowForwardTwoTone } from "@mui/icons-material";
 
 function Addresses() {
   const addresses = {
     delivery: 12,
-    shipping: 8
+    shipping: 8,
   };
 
   return (
@@ -28,9 +28,9 @@ function Addresses() {
         <Card>
           <CardHeader
             title="Delivery Addresses"
-            subheader={addresses.delivery + ' saved addresses'}
+            subheader={addresses.delivery + " saved addresses"}
           />
-          <Divider />
+          {/* <Divider /> */}
           <Box p={2}>
             <Typography variant="caption" fontWeight="bold">
               Favourite
@@ -58,9 +58,9 @@ function Addresses() {
         <Card>
           <CardHeader
             title="Shipping Addresses"
-            subheader={addresses.shipping + ' saved addresses'}
+            subheader={addresses.shipping + " saved addresses"}
           />
-          <Divider />
+          {/* <Divider /> */}
           <Box p={2}>
             <Typography variant="caption" fontWeight="bold">
               Favourite

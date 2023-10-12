@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 import {
   Button,
   Card,
@@ -8,7 +8,7 @@ import {
   CardActions,
   Typography,
   Avatar,
-  Divider,
+  // Divider,
   Rating,
   OutlinedInput,
   Chip,
@@ -19,14 +19,14 @@ import {
   Menu,
   MenuItem,
   styled,
-  useTheme
-} from '@mui/material';
-import { formatDistance, subMonths, subDays } from 'date-fns';
-import TodayTwoToneIcon from '@mui/icons-material/TodayTwoTone';
-import Link from 'src/components/Link';
-import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
-import Text from 'src/components/Text';
-import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
+  useTheme,
+} from "@mui/material";
+import { formatDistance, subMonths, subDays } from "date-fns";
+import TodayTwoToneIcon from "@mui/icons-material/TodayTwoTone";
+import Link from "src/components/Link";
+import SearchTwoToneIcon from "@mui/icons-material/SearchTwoTone";
+import Text from "src/components/Text";
+import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 
 const OutlinedInputWrapper = styled(OutlinedInput)(
   ({ theme }) => `
@@ -44,21 +44,21 @@ function TaskSearch() {
 
   const periods = [
     {
-      value: 'popular',
-      text: 'Most popular'
+      value: "popular",
+      text: "Most popular",
     },
     {
-      value: 'recent',
-      text: 'Recent tasks'
+      value: "recent",
+      text: "Recent tasks",
     },
     {
-      value: 'updated',
-      text: 'Latest updated tasks'
+      value: "updated",
+      text: "Latest updated tasks",
     },
     {
-      value: 'oldest',
-      text: 'Oldest tasks first'
-    }
+      value: "oldest",
+      text: "Oldest tasks first",
+    },
   ];
 
   const actionRef1 = useRef<any>(null);
@@ -93,7 +93,7 @@ function TaskSearch() {
       >
         <Box>
           <Typography variant="subtitle2">
-            Showing{' '}
+            Showing{" "}
             <Text color="black">
               <b>57 tasks</b>
             </Text>
@@ -103,7 +103,7 @@ function TaskSearch() {
           <Typography
             variant="subtitle2"
             sx={{
-              pr: 1
+              pr: 1,
             }}
           >
             Sort by:
@@ -123,12 +123,12 @@ function TaskSearch() {
             onClose={() => setOpenMenuPeriod(false)}
             open={openPeriod}
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right'
+              vertical: "bottom",
+              horizontal: "right",
             }}
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
+              vertical: "top",
+              horizontal: "right",
             }}
           >
             {periods.map((_period) => (
@@ -151,7 +151,7 @@ function TaskSearch() {
             variant="outlined"
             sx={{
               p: 3,
-              background: `${theme.colors.alpha.black[5]}`
+              background: `${theme.colors.alpha.black[5]}`,
             }}
           >
             <Box>
@@ -162,12 +162,12 @@ function TaskSearch() {
             </Link>
             <Box
               sx={{
-                py: 2
+                py: 2,
               }}
             >
               <Chip
                 sx={{
-                  mr: 0.5
+                  mr: 0.5,
                 }}
                 size="small"
                 label="Website"
@@ -177,7 +177,7 @@ function TaskSearch() {
               />
               <Chip
                 sx={{
-                  mr: 0.5
+                  mr: 0.5,
                 }}
                 size="small"
                 label="Integrations"
@@ -188,7 +188,7 @@ function TaskSearch() {
             </Box>
             <Typography
               sx={{
-                pb: 2
+                pb: 2,
               }}
               color="text.secondary"
             >
@@ -199,16 +199,16 @@ function TaskSearch() {
             <Button size="small" variant="contained">
               View task
             </Button>
-            <Divider
+            {/* <Divider
               sx={{
-                my: 2
+                my: 2,
               }}
-            />
+            /> */}
             <CardActions
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               <Typography
@@ -218,11 +218,11 @@ function TaskSearch() {
               >
                 <TodayTwoToneIcon
                   sx={{
-                    mr: 1
+                    mr: 1,
                   }}
                 />
                 {formatDistance(subDays(new Date(), 24), new Date(), {
-                  addSuffix: true
+                  addSuffix: true,
                 })}
               </Typography>
               <AvatarGroup>
@@ -230,7 +230,7 @@ function TaskSearch() {
                   <Avatar
                     sx={{
                       width: 30,
-                      height: 30
+                      height: 30,
                     }}
                     component={Link}
                     href="#"
@@ -242,7 +242,7 @@ function TaskSearch() {
                   <Avatar
                     sx={{
                       width: 30,
-                      height: 30
+                      height: 30,
                     }}
                     component={Link}
                     href="#"
@@ -259,7 +259,7 @@ function TaskSearch() {
             variant="outlined"
             sx={{
               p: 3,
-              background: `${theme.colors.alpha.black[5]}`
+              background: `${theme.colors.alpha.black[5]}`,
             }}
           >
             <Box>
@@ -270,12 +270,12 @@ function TaskSearch() {
             </Link>
             <Box
               sx={{
-                py: 2
+                py: 2,
               }}
             >
               <Chip
                 sx={{
-                  mr: 0.5
+                  mr: 0.5,
                 }}
                 size="small"
                 label="Website"
@@ -285,7 +285,7 @@ function TaskSearch() {
               />
               <Chip
                 sx={{
-                  mr: 0.5
+                  mr: 0.5,
                 }}
                 size="small"
                 label="Integrations"
@@ -296,7 +296,7 @@ function TaskSearch() {
             </Box>
             <Typography
               sx={{
-                pb: 2
+                pb: 2,
               }}
               color="text.secondary"
             >
@@ -307,16 +307,16 @@ function TaskSearch() {
             <Button size="small" variant="contained">
               View task
             </Button>
-            <Divider
+            {/* <Divider
               sx={{
-                my: 2
+                my: 2,
               }}
-            />
+            /> */}
             <CardActions
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               <Typography
@@ -326,11 +326,11 @@ function TaskSearch() {
               >
                 <TodayTwoToneIcon
                   sx={{
-                    mr: 1
+                    mr: 1,
                   }}
                 />
                 {formatDistance(subMonths(new Date(), 2), new Date(), {
-                  addSuffix: true
+                  addSuffix: true,
                 })}
               </Typography>
               <AvatarGroup>
@@ -338,7 +338,7 @@ function TaskSearch() {
                   <Avatar
                     sx={{
                       width: 30,
-                      height: 30
+                      height: 30,
                     }}
                     component={Link}
                     href="#"
@@ -350,7 +350,7 @@ function TaskSearch() {
                   <Avatar
                     sx={{
                       width: 30,
-                      height: 30
+                      height: 30,
                     }}
                     component={Link}
                     href="#"
@@ -362,7 +362,7 @@ function TaskSearch() {
                   <Avatar
                     sx={{
                       width: 30,
-                      height: 30
+                      height: 30,
                     }}
                     component={Link}
                     href="#"
@@ -379,7 +379,7 @@ function TaskSearch() {
             variant="outlined"
             sx={{
               p: 3,
-              background: `${theme.colors.alpha.black[5]}`
+              background: `${theme.colors.alpha.black[5]}`,
             }}
           >
             <Box>
@@ -390,12 +390,12 @@ function TaskSearch() {
             </Link>
             <Box
               sx={{
-                py: 2
+                py: 2,
               }}
             >
               <Chip
                 sx={{
-                  mr: 0.5
+                  mr: 0.5,
                 }}
                 size="small"
                 label="Website"
@@ -405,7 +405,7 @@ function TaskSearch() {
               />
               <Chip
                 sx={{
-                  mr: 0.5
+                  mr: 0.5,
                 }}
                 size="small"
                 label="Integrations"
@@ -416,7 +416,7 @@ function TaskSearch() {
             </Box>
             <Typography
               sx={{
-                pb: 2
+                pb: 2,
               }}
               color="text.secondary"
             >
@@ -427,16 +427,16 @@ function TaskSearch() {
             <Button size="small" variant="contained">
               View task
             </Button>
-            <Divider
+            {/* <Divider
               sx={{
-                my: 2
+                my: 2,
               }}
-            />
+            /> */}
             <CardActions
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
               <Typography
@@ -446,11 +446,11 @@ function TaskSearch() {
               >
                 <TodayTwoToneIcon
                   sx={{
-                    mr: 1
+                    mr: 1,
                   }}
                 />
                 {formatDistance(subDays(new Date(), 31), new Date(), {
-                  addSuffix: true
+                  addSuffix: true,
                 })}
               </Typography>
               <AvatarGroup>
@@ -458,7 +458,7 @@ function TaskSearch() {
                   <Avatar
                     sx={{
                       width: 30,
-                      height: 30
+                      height: 30,
                     }}
                     component={Link}
                     href="#"
@@ -470,7 +470,7 @@ function TaskSearch() {
                   <Avatar
                     sx={{
                       width: 30,
-                      height: 30
+                      height: 30,
                     }}
                     component={Link}
                     href="#"
@@ -482,7 +482,7 @@ function TaskSearch() {
                   <Avatar
                     sx={{
                       width: 30,
-                      height: 30
+                      height: 30,
                     }}
                     component={Link}
                     href="#"
@@ -497,7 +497,7 @@ function TaskSearch() {
       </Grid>
       <Box
         sx={{
-          pt: 4
+          pt: 4,
         }}
         display="flex"
         alignItems="center"

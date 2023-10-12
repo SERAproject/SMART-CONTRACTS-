@@ -1,10 +1,10 @@
-import { forwardRef, Ref, useState, ReactElement, ChangeEvent } from 'react';
+import { forwardRef, Ref, useState, ReactElement, ChangeEvent } from "react";
 import {
   Avatar,
   Link,
   Box,
   Button,
-  Divider,
+  // Divider,
   IconButton,
   InputAdornment,
   lighten,
@@ -19,14 +19,14 @@ import {
   DialogContent,
   DialogTitle,
   Slide,
-  Hidden
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { TransitionProps } from '@mui/material/transitions';
-import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+  Hidden,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { TransitionProps } from "@mui/material/transitions";
+import SearchTwoToneIcon from "@mui/icons-material/SearchTwoTone";
+import FindInPageTwoToneIcon from "@mui/icons-material/FindInPageTwoTone";
 
-import ChevronRightTwoToneIcon from '@mui/icons-material/ChevronRightTwoTone';
+import ChevronRightTwoToneIcon from "@mui/icons-material/ChevronRightTwoTone";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & { children: ReactElement<any, any> },
@@ -66,7 +66,7 @@ const DialogTitleWrapper = styled(DialogTitle)(
 
 function HeaderSearch() {
   const [openSearchResults, setOpenSearchResults] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(event.target.value);
@@ -117,14 +117,14 @@ function HeaderSearch() {
                 <InputAdornment position="start">
                   <SearchTwoToneIcon />
                 </InputAdornment>
-              )
+              ),
             }}
             placeholder="Search terms here..."
             fullWidth
             label="Search"
           />
         </DialogTitleWrapper>
-        <Divider />
+        {/* <Divider /> */}
 
         {openSearchResults && (
           <DialogContent>
@@ -134,9 +134,9 @@ function HeaderSearch() {
               justifyContent="space-between"
             >
               <Typography variant="body2" component="span">
-                Search results for{' '}
+                Search results for{" "}
                 <Typography
-                  sx={{ fontWeight: 'bold' }}
+                  sx={{ fontWeight: "bold" }}
                   variant="body1"
                   component="span"
                 >
@@ -147,7 +147,7 @@ function HeaderSearch() {
                 Advanced search
               </Link>
             </Box>
-            <Divider sx={{ my: 1 }} />
+            {/* <Divider sx={{ my: 1 }} /> */}
             <List disablePadding>
               <ListItem button>
                 <Hidden smDown>
@@ -155,7 +155,7 @@ function HeaderSearch() {
                     <Avatar
                       sx={{
                         background: (theme: Theme) =>
-                          theme.palette.secondary.main
+                          theme.palette.secondary.main,
                       }}
                     >
                       <FindInPageTwoToneIcon />
@@ -167,7 +167,7 @@ function HeaderSearch() {
                     <Link
                       href="#"
                       underline="hover"
-                      sx={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: "bold" }}
                       variant="body2"
                     >
                       Dashboard for Healthcare Platform
@@ -178,7 +178,7 @@ function HeaderSearch() {
                     variant="body2"
                     sx={{
                       color: (theme: Theme) =>
-                        lighten(theme.palette.secondary.main, 0.5)
+                        lighten(theme.palette.secondary.main, 0.5),
                     }}
                   >
                     This page contains all the necessary information for
@@ -187,14 +187,14 @@ function HeaderSearch() {
                 </Box>
                 <ChevronRightTwoToneIcon />
               </ListItem>
-              <Divider sx={{ my: 1 }} component="li" />
+              {/* <Divider sx={{ my: 1 }} component="li" /> */}
               <ListItem button>
                 <Hidden smDown>
                   <ListItemAvatar>
                     <Avatar
                       sx={{
                         background: (theme: Theme) =>
-                          theme.palette.secondary.main
+                          theme.palette.secondary.main,
                       }}
                     >
                       <FindInPageTwoToneIcon />
@@ -206,7 +206,7 @@ function HeaderSearch() {
                     <Link
                       href="#"
                       underline="hover"
-                      sx={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: "bold" }}
                       variant="body2"
                     >
                       Example Projects Application
@@ -217,7 +217,7 @@ function HeaderSearch() {
                     variant="body2"
                     sx={{
                       color: (theme: Theme) =>
-                        lighten(theme.palette.secondary.main, 0.5)
+                        lighten(theme.palette.secondary.main, 0.5),
                     }}
                   >
                     This is yet another search result pointing to a app page.
@@ -225,14 +225,14 @@ function HeaderSearch() {
                 </Box>
                 <ChevronRightTwoToneIcon />
               </ListItem>
-              <Divider sx={{ my: 1 }} component="li" />
+              {/* <Divider sx={{ my: 1 }} component="li" /> */}
               <ListItem button>
                 <Hidden smDown>
                   <ListItemAvatar>
                     <Avatar
                       sx={{
                         background: (theme: Theme) =>
-                          theme.palette.secondary.main
+                          theme.palette.secondary.main,
                       }}
                     >
                       <FindInPageTwoToneIcon />
@@ -244,7 +244,7 @@ function HeaderSearch() {
                     <Link
                       href="#"
                       underline="hover"
-                      sx={{ fontWeight: 'bold' }}
+                      sx={{ fontWeight: "bold" }}
                       variant="body2"
                     >
                       Search Results Page
@@ -255,7 +255,7 @@ function HeaderSearch() {
                     variant="body2"
                     sx={{
                       color: (theme: Theme) =>
-                        lighten(theme.palette.secondary.main, 0.5)
+                        lighten(theme.palette.secondary.main, 0.5),
                     }}
                   >
                     Choose if you would like to show or not this typography
@@ -265,8 +265,8 @@ function HeaderSearch() {
                 <ChevronRightTwoToneIcon />
               </ListItem>
             </List>
-            <Divider sx={{ mt: 1, mb: 2 }} />
-            <Box sx={{ textAlign: 'center' }}>
+            {/* <Divider sx={{ mt: 1, mb: 2 }} /> */}
+            <Box sx={{ textAlign: "center" }}>
               <Button color="primary">View all search results</Button>
             </Box>
           </DialogContent>

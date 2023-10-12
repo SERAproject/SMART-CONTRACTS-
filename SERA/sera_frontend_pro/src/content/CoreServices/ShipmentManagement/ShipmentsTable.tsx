@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, useContext } from 'react';
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 import {
   Box,
   Card,
@@ -11,37 +11,36 @@ import {
   TableRow,
   TableContainer,
   Typography,
-  Tooltip,
-  Divider
-} from '@mui/material';
-import Label from '@/components/Label';
-import { Shipment, ShipmentStatus } from '@/models/core-services/shipment';
-import { SeraContext } from '@/contexts/SeraContext';
+  // Divider,
+} from "@mui/material";
+import Label from "@/components/Label";
+import { Shipment, ShipmentStatus } from "@/models/core-services/shipment";
+import { SeraContext } from "@/contexts/SeraContext";
 
 const shipmentsData: Shipment[] = [
   {
-    po_id: '1',
-    importer: 'Trade 3DC',
+    po_id: "1",
+    importer: "Trade 3DC",
     delivery_term: null,
-    payment_term: '12000',
-    status: 'pending'
-  }
+    payment_term: "12000",
+    status: "pending",
+  },
 ];
 
 const getStatusLabel = (shipmentStatus: ShipmentStatus): JSX.Element => {
   const map = {
     failed: {
-      text: 'Failed',
-      color: 'error'
+      text: "Failed",
+      color: "error",
     },
     completed: {
-      text: 'Completed',
-      color: 'success'
+      text: "Completed",
+      color: "success",
     },
     pending: {
-      text: 'Pending',
-      color: 'warning'
-    }
+      text: "Pending",
+      color: "warning",
+    },
   };
 
   const { text, color }: any = map[shipmentStatus];
@@ -60,7 +59,7 @@ const applyPagination = (
 const ShipmentsDialog = () => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
-  const [searchText, setSearchText] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>("");
   const { shipments, SetShipments } = useContext(SeraContext);
   const [filteredPartner, setFilteredPartner] = useState<Shipment[]>([]);
 
@@ -91,7 +90,7 @@ const ShipmentsDialog = () => {
       <Box
         component="form"
         sx={{
-          '& > :not(style)': { m: 1, width: '30%', float: 'right' }
+          "& > :not(style)": { m: 1, width: "30%", float: "right" },
         }}
         noValidate
         autoComplete="off"
@@ -103,7 +102,7 @@ const ShipmentsDialog = () => {
           onChange={handleSearch}
         />
       </Box>
-      <Divider />
+      {/* <Divider /> */}
       <TableContainer>
         <Table>
           <TableHead>
